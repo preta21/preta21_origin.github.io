@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SEANAMO || </title>
+    <title>SEANAMO || 2021-8-27</title>
     <meta name="author" content="Seana">
     <meta name="description" content=" ">
     <meta name="keywords" content=" ">
@@ -169,7 +169,7 @@
 <link rel="stylesheet" href="/css/post-body.css">
 <div class="article">
     <div>
-        <h1> </h1>
+        <h1>2021-8-27 </h1>
     </div>
     <div class="info">
         <span class="date">
@@ -185,17 +185,27 @@
     </div>
 
     <div class="content" v-pre>
-        <!--Html 5 的编写模板-->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+        <p><code>9:21</code></p>
+<pre><code>刚起床没多久。
+准备工作吧。
+又是个晴天。
+想了一下，关于博客的记述，主要还是使用markdown吧。方便一些。
+如果想更改样式，等到有时间来更改这个hexo的模板吧。至少现在不想。
+markdown够用了。
+</code></pre>
+<p>今天要做的事情啊：</p>
+<ol>
+<li> <strong>《数字设计》</strong> 教材第二章完结和总结，并使用Verilog再编写一个器件，比如<font color="lightskyblue"><strong>七段数码管</strong></font>;</li>
+<li> 看一点 <font color="forestgreen"> <strong>CNN</strong> </font>相关的知识，可以继续学习 <strong>Standford</strong> 的教程；</li>
+<li> 中午看一点点 <font color="orange"> <strong>应用概率论</strong> </font>叭，看看叭。<pre><code>还有一个要注意的事情。做这些企划，我应当求少求精。
+即使一天只做两件事情。
+是的我觉得一天只做两件事情就够了。
+宁缺毋滥，要不断有成就感。
+比如今天就是，数字设计，和应用概率论，本质上就可以了。
+</code></pre>
+</li>
+</ol>
 
-</body>
-</html>
     </div>
 
     
@@ -268,6 +278,21 @@
             }
         }
     })
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script>
+    const gitalk = new Gitalk({
+        clientID: '',
+        clientSecret: '',
+        repo: 'hexo-theme-particle',      // The repository of store comments,
+        owner: 'korilin',
+        admin: ['korilin'],
+        language: 'en',
+        id: location.pathname,      // Ensure uniqueness and length less than 50
+        distractionFreeMode: true  // Facebook-like distraction free mode
+    })
+    gitalk.render('gitalk-container')
 </script>
 
 </body>
