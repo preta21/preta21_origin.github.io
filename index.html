@@ -197,6 +197,97 @@
 
 <div class="post">
 
+    <a href="/2021/09/04/Verilog-简单的测试代码注意事项/">
+        <h2>
+            Verilog 简单的测试代码注意事项
+        </h2>
+    </a>
+
+    <div class="category-and-date">
+
+        
+
+        <span class="date">
+            <span class="icon">
+                <a-icon type="calendar" theme="filled" />
+            </span>
+            2021/9/4
+        </span>
+
+    </div>
+
+    <div class="excerpt">
+        <div class="content" v-pre>
+            
+            
+            <p><strong>在主模块中注意：</strong><br><br></p>
+<p><code>原模块中的 output 类型接口可以声明为 reg 类型，但是 input 接口不能声明为 reg</code>;<br><br><br><br></p>
+<p><strong>在测试模块中注意：</strong></p>
+<p><code>1. 在测试模块中，声明的变量一定都是 wire 类型的</code>;<br><br></p>
+<p><code>2. 测试模块的模块声明中没有变量</code>;<br><br></p>
+<p><code>3. 原模块与测试模块中各个变量所声明的长度必须一致</code>。</p>
+<br>
+
+<p><strong>示例的代码<code>tmp.v</code>如下：</strong></p>
+<pre><code class="verilog">module tmp (
+    input [1:0] signal,
+    output reg [1:0] flag
+);
+    initial begin // 如果这里使用 always 语句块，则最终输出的总是 x 
+        if (signal == 2&#39;d0) begin
+            flag = 2&#39;d2;
+        end
+        else if (signal == 2&#39;d1) begin
+            flag = 2&#39;d1;
+        end
+        else if (signal == 2&#39;d2) begin
+            flag = 2&#39;d0;
+        end
+    end
+endmodule //tmp
+
+
+module tmp_test;
+wire [1:0] sig;
+wire [1:0] f;
+assign sig = 2&#39;d1;
+tmp uut (
+    .signal(sig),
+    .flag(f)
+);
+initial begin
+    $display(f); // 输出结果
+end
+endmodule // tmp_test
+</code></pre>
+
+            
+        </div>
+    </div>
+
+    <div class="post-tags">
+        
+        <span class="icon">
+            <a-icon type="tags" theme="filled" />
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/verilog" style=color:#006674>
+                verilog
+            </a>
+        </span>
+        
+    </div>
+
+    <a href="/2021/09/04/Verilog-简单的测试代码注意事项/ " class="go-post">
+        阅读全文
+    </a>
+</div>
+
+<div class="post">
+
     <a href="/2021/09/03/2021-9-3/">
         <h2>
             2021-9-3
@@ -245,7 +336,7 @@
         
         <span class="tag">
             
-            <a href="/tags/daily" style=color:#6484be>
+            <a href="/tags/daily" style=color:#607d8b>
                 daily
             </a>
         </span>
@@ -715,59 +806,6 @@ Good night, baby
     </a>
 </div>
 
-<div class="post">
-
-    <a href="/2021/05/20/hello-world/">
-        <h2>
-            Hello World
-        </h2>
-    </a>
-
-    <div class="category-and-date">
-
-        
-
-        <span class="date">
-            <span class="icon">
-                <a-icon type="calendar" theme="filled" />
-            </span>
-            2021/5/20
-        </span>
-
-    </div>
-
-    <div class="excerpt">
-        <div class="content" v-pre>
-            
-            
-            <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre><code class="bash">$ hexo new &quot;My New Post&quot;
-</code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre><code class="bash">$ hexo server
-</code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre><code class="bash">$ hexo generate
-</code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre><code class="bash">$ hexo deploy
-</code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-            
-        </div>
-    </div>
-
-    <div class="post-tags">
-        
-        
-    </div>
-
-    <a href="/2021/05/20/hello-world/ " class="go-post">
-        阅读全文
-    </a>
-</div>
-
 
              
 <div class="page-current">
@@ -785,10 +823,28 @@ Good night, baby
         </span>
 
         
+        <span>
+            <a href="/page/2/">
+                <span class="page-num">
+                    2
+                </span>
+            </a>
+            
+
+            
+
+        </span>
+        
 
     </div>
 
     <div class="next">
+        
+        <a href="/page/2/ ">
+            <span class="page-num">
+                <a-icon type="caret-right" theme="filled" />
+            </span>
+        </a>
         
     </div>
 

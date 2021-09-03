@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SEANAMO || </title>
+    <title>SEANAMO || Verilog 简单的测试代码注意事项</title>
     <meta name="author" content="Seana">
     <meta name="description" content=" ">
     <meta name="keywords" content=" ">
@@ -165,229 +165,92 @@
                 </div>
 
                 <div id="main">
-                    
-<div id="archives">
-    
-    <a-timeline>
-        <a-timeline-item timestamp="2021/9/4" placement="top" color="#a5c2f5">
-            <a-card hoverable>
-                <div class="item-time">2021/9/4</div>
-                <a href="/2021/09/04/Verilog-简单的测试代码注意事项/">
-                    <h3>Verilog 简单的测试代码注意事项</h3>
-                </a>
-                <div class="info">
-                    
+                     
+<link rel="stylesheet" href="/css/post-body.css">
+<div class="article">
+    <div>
+        <h1>Verilog 简单的测试代码注意事项 </h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <a-icon type="calendar" theme="filled" />
+            </span>
+            2021/9/4
+        </span>
 
-                    
-                    <span class="tags">
-                        <span class="icon">
-                            <a-icon type="tags" />
-                        </span>
-                        
-                        <span class="tag">
-                            
-                            <a href="/tags/verilog" style=color:#016a99>
-                                verilog
-                            </a>
-                        </span>
-                        
-                    </span>
-                    
-                </div>
-            </a-card>
-        </a-timeline-item>
-    </a-timeline>
-    
-    <a-timeline>
-        <a-timeline-item timestamp="2021/9/3" placement="top" color="#a5c2f5">
-            <a-card hoverable>
-                <div class="item-time">2021/9/3</div>
-                <a href="/2021/09/03/2021-9-3/">
-                    <h3>2021-9-3</h3>
-                </a>
-                <div class="info">
-                    
+        
 
-                    
-                    <span class="tags">
-                        <span class="icon">
-                            <a-icon type="tags" />
-                        </span>
-                        
-                        <span class="tag">
-                            
-                            <a href="/tags/daily" style=color:#006674>
-                                daily
-                            </a>
-                        </span>
-                        
-                    </span>
-                    
-                </div>
-            </a-card>
-        </a-timeline-item>
-    </a-timeline>
-    
-    <a-timeline>
-        <a-timeline-item timestamp="2021/8/29" placement="top" color="#a5c2f5">
-            <a-card hoverable>
-                <div class="item-time">2021/8/29</div>
-                <a href="/2021/08/29/2021-8-29/">
-                    <h3>2021-8-29</h3>
-                </a>
-                <div class="info">
-                    
+        
 
-                    
-                    <span class="tags">
-                        <span class="icon">
-                            <a-icon type="tags" />
-                        </span>
-                        
-                        <span class="tag">
-                            
-                            <a href="/tags/daily" style=color:#6484be>
-                                daily
-                            </a>
-                        </span>
-                        
-                    </span>
-                    
-                </div>
-            </a-card>
-        </a-timeline-item>
-    </a-timeline>
-    
-    <a-timeline>
-        <a-timeline-item timestamp="2021/8/28" placement="top" color="#a5c2f5">
-            <a-card hoverable>
-                <div class="item-time">2021/8/28</div>
-                <a href="/2021/08/28/2021-8-28/">
-                    <h3>2021-8-28</h3>
+        <span class="tags">
+            <span class="icon">
+                <a-icon type="tags" theme="filled" />
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/verilog" style=color:#006674>
+                    verilog
                 </a>
-                <div class="info">
-                    
+            </span>
+            
+        </span>
+        
+    </div>
 
-                    
-                </div>
-            </a-card>
-        </a-timeline-item>
-    </a-timeline>
+    <div class="content" v-pre>
+        <p><strong>在主模块中注意：</strong><br><br></p>
+<p><code>原模块中的 output 类型接口可以声明为 reg 类型，但是 input 接口不能声明为 reg</code>;<br><br><br><br></p>
+<p><strong>在测试模块中注意：</strong></p>
+<p><code>1. 在测试模块中，声明的变量一定都是 wire 类型的</code>;<br><br></p>
+<p><code>2. 测试模块的模块声明中没有变量</code>;<br><br></p>
+<p><code>3. 原模块与测试模块中各个变量所声明的长度必须一致</code>。</p>
+<br>
+
+<p><strong>示例的代码<code>tmp.v</code>如下：</strong></p>
+<pre><code class="verilog">module tmp (
+    input [1:0] signal,
+    output reg [1:0] flag
+);
+    initial begin // 如果这里使用 always 语句块，则最终输出的总是 x 
+        if (signal == 2&#39;d0) begin
+            flag = 2&#39;d2;
+        end
+        else if (signal == 2&#39;d1) begin
+            flag = 2&#39;d1;
+        end
+        else if (signal == 2&#39;d2) begin
+            flag = 2&#39;d0;
+        end
+    end
+endmodule //tmp
+
+
+module tmp_test;
+wire [1:0] sig;
+wire [1:0] f;
+assign sig = 2&#39;d1;
+tmp uut (
+    .signal(sig),
+    .flag(f)
+);
+initial begin
+    $display(f); // 输出结果
+end
+endmodule // tmp_test
+</code></pre>
+
+    </div>
+
     
-    <a-timeline>
-        <a-timeline-item timestamp="2021/8/27" placement="top" color="#a5c2f5">
-            <a-card hoverable>
-                <div class="item-time">2021/8/27</div>
-                <a href="/2021/08/27/2021-8-27/">
-                    <h3>2021-8-27</h3>
-                </a>
-                <div class="info">
-                    
-
-                    
-                </div>
-            </a-card>
-        </a-timeline-item>
-    </a-timeline>
-    
-    <a-timeline>
-        <a-timeline-item timestamp="2021/8/26" placement="top" color="#a5c2f5">
-            <a-card hoverable>
-                <div class="item-time">2021/8/26</div>
-                <a href="/2021/08/26/2021-8-26/">
-                    <h3>事项 2021-8-26</h3>
-                </a>
-                <div class="info">
-                    
-
-                    
-                </div>
-            </a-card>
-        </a-timeline-item>
-    </a-timeline>
-    
-    <a-timeline>
-        <a-timeline-item timestamp="2021/8/26" placement="top" color="#a5c2f5">
-            <a-card hoverable>
-                <div class="item-time">2021/8/26</div>
-                <a href="/2021/08/26/事先说明/">
-                    <h3>事先说明</h3>
-                </a>
-                <div class="info">
-                    
-
-                    
-                </div>
-            </a-card>
-        </a-timeline-item>
-    </a-timeline>
-    
-    <a-timeline>
-        <a-timeline-item timestamp="2021/7/20" placement="top" color="#a5c2f5">
-            <a-card hoverable>
-                <div class="item-time">2021/7/20</div>
-                <a href="/2021/07/20/回归到hexo/">
-                    <h3>回归到hexo</h3>
-                </a>
-                <div class="info">
-                    
-
-                    
-                </div>
-            </a-card>
-        </a-timeline-item>
-    </a-timeline>
-    
-    <a-timeline>
-        <a-timeline-item timestamp="2021/5/24" placement="top" color="#a5c2f5">
-            <a-card hoverable>
-                <div class="item-time">2021/5/24</div>
-                <a href="/2021/05/24/2021-5-24/">
-                    <h3>2021-5-24</h3>
-                </a>
-                <div class="info">
-                    
-
-                    
-                </div>
-            </a-card>
-        </a-timeline-item>
-    </a-timeline>
-    
-    <a-timeline>
-        <a-timeline-item timestamp="2021/5/22" placement="top" color="#a5c2f5">
-            <a-card hoverable>
-                <div class="item-time">2021/5/22</div>
-                <a href="/2021/05/22/入驻hexo的新一天/">
-                    <h3>入驻hexo的新一天</h3>
-                </a>
-                <div class="info">
-                    
-
-                    
-                </div>
-            </a-card>
-        </a-timeline-item>
-    </a-timeline>
-    
-    <a-timeline>
-        <a-timeline-item timestamp="2021/5/20" placement="top" color="#a5c2f5">
-            <a-card hoverable>
-                <div class="item-time">2021/5/20</div>
-                <a href="/2021/05/20/hello-world/">
-                    <h3>Hello World</h3>
-                </a>
-                <div class="info">
-                    
-
-                    
-                </div>
-            </a-card>
-        </a-timeline-item>
-    </a-timeline>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <div id="comment">
+        <div id="gitalk-container">
+        </div>
+    </div>
     
 </div>
-
                      
 <footer id="footer">
     <div class="footer-wrap">
@@ -450,6 +313,21 @@
             }
         }
     })
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script>
+    const gitalk = new Gitalk({
+        clientID: '',
+        clientSecret: '',
+        repo: 'hexo-theme-particle',      // The repository of store comments,
+        owner: 'korilin',
+        admin: ['korilin'],
+        language: 'en',
+        id: location.pathname,      // Ensure uniqueness and length less than 50
+        distractionFreeMode: true  // Facebook-like distraction free mode
+    })
+    gitalk.render('gitalk-container')
 </script>
 
 </body>
