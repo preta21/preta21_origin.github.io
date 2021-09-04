@@ -221,62 +221,14 @@
             
             
             <p><code>17:05</code><br><strong>Verilog</strong> 和高级编程语言的不同，我想我现在可以总结上一两点。  </p>
-<pre><code>    高级语言的好处显而易见，其思维是无限接近于人的思想的，按照人的思维方式来完成任务。基本上其实所见即所得。
-所以其做的事情也更高级，从更高的层面，主要是算法这一思想层面去工作研究。如果为高级语言完成的任务进行一个结构分析，  
-那么结果也就是人所想的过程，只不过做一些思维和人性化的美化，是软件工程中进行软件的生命周期分析（需求分析、可行性分析、概要设计、
-详细设计、编码、测试、调试），或是在敏捷开发中，对于每一个用户场景（User Story）进行分析从而得出合理的功能流程。
-整体下来就是要完成人要做的事情。基本的思路是很明确的。
-</code></pre>
-<pre><code>    最近除了在学习《数字电路》的知识，也在看一些Verilog的经典教程，敲敲代码，读读心得之间，也对Verilog逐渐入门——
-当然随着学习的深入，学习的难度也在上升，感觉是自己在给自己上课。也许相对本科时期那种相对宽松的学习时间和环境，
-我当今的效率已经很高了，而且投入与产出目前也比较好。但是，我现在是在硕士阶段，等待我做的不光有前所未有的新课程
-的学习，还有实际要完成的项目，我应当以一个更高的水准来要求自己。
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">    高级语言的好处显而易见，其思维是无限接近于人的思想的，按照人的思维方式来完成任务。基本上其实所见即所得。</span><br><span class="line">所以其做的事情也更高级，从更高的层面，主要是算法这一思想层面去工作研究。如果为高级语言完成的任务进行一个结构分析，  </span><br><span class="line">那么结果也就是人所想的过程，只不过做一些思维和人性化的美化，是软件工程中进行软件的生命周期分析（需求分析、可行性分析、概要设计、</span><br><span class="line">详细设计、编码、测试、调试），或是在敏捷开发中，对于每一个用户场景（User Story）进行分析从而得出合理的功能流程。</span><br><span class="line">整体下来就是要完成人要做的事情。基本的思路是很明确的。</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">    最近除了在学习《数字电路》的知识，也在看一些Verilog的经典教程，敲敲代码，读读心得之间，也对Verilog逐渐入门——</span><br><span class="line">当然随着学习的深入，学习的难度也在上升，感觉是自己在给自己上课。也许相对本科时期那种相对宽松的学习时间和环境，</span><br><span class="line">我当今的效率已经很高了，而且投入与产出目前也比较好。但是，我现在是在硕士阶段，等待我做的不光有前所未有的新课程</span><br><span class="line">的学习，还有实际要完成的项目，我应当以一个更高的水准来要求自己。</span><br></pre></td></tr></table></figure>
 <p>虽然不是很喜欢所看的Verilog教程的作者的语言风格，但是其中有个概念我觉得很对：Verilog语言的作用不是编码，<br>而是<font color="forestgreen" size=4> <strong>建模</strong> </font>。</p>
-<pre><code>    就尤其我目前的学习体验来说，最有收获感的学习过程，莫过于刚学习过数字电路的基础知识，学习了一两个逻辑器件，然后使用
-Verilog实现器件的逻辑；单纯地去复刻别人的代码，即使有代码注释，也很难读懂代码。所以，特别是现在学习Verilog的初期，我觉得
-遵守组合电路或者时序电路的构建思路再来编写代码，很重要。而且，我更深地感觉到，写Verilog的代码，绝不能脱离数字电路这个实体。
-Verilog代码只是属于整个数字电路研发过程中的一部分。
-
-    比如，从组合电路出发的话，就是
-    1.  描述功能；
-    2.  做真值表；
-    3.  根据真值表写出布尔表达式；
-    4.  化简布尔表达式（卡诺图）；
-    5.  根据布尔表达式画出逻辑电路图；
-    6.  使用 verilog 对电路进行编码
-        ·电路综合（此处可以通过vivado等EDA得到代码对应的逻辑电路图RTL）；
-        ·电路布线（得到根据硬件的实际接口情况完成的电路图）；
-        ·生成bit流文件；
-        ·进行仿真/生成bin文件，bin文件可以烧写到开发板上
-    
-    从时序电路出发，大概是（有些知识还在学习之中）
-    1.  描述功能；
-    2.  做状态转换图（Moore / Mealy）；
-    3.  做状态转换表；
-    4.  对状态进行 二进制编码 或者 独热编码（被编码的一个状态可能对应多位编码，在新的状态转换表中是多位输入）；
-    5.  根据编码后的状态更新状态转换表，并做出状态和输出的对应表；
-    6.  根据编码后的状态转换表、输出表（此时类似于真值表形式），做出每一个下一个状态和输出的布尔表达式；
-    7.  化简布尔表达式（卡诺图）；
-    8.  根据布尔表达式画出逻辑电路图；
-    9.  使用 verilog 对电路进行编码
-        ·电路综合（此处可以通过vivado等EDA得到代码对应的逻辑电路图RTL）；
-        ·电路布线（得到根据硬件的实际接口情况完成的电路图）；
-        ·生成bit流文件；
-        ·进行仿真/生成bin文件，bin文件可以烧写到开发板上
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">    就尤其我目前的学习体验来说，最有收获感的学习过程，莫过于刚学习过数字电路的基础知识，学习了一两个逻辑器件，然后使用</span><br><span class="line">Verilog实现器件的逻辑；单纯地去复刻别人的代码，即使有代码注释，也很难读懂代码。所以，特别是现在学习Verilog的初期，我觉得</span><br><span class="line">遵守组合电路或者时序电路的构建思路再来编写代码，很重要。而且，我更深地感觉到，写Verilog的代码，绝不能脱离数字电路这个实体。</span><br><span class="line">Verilog代码只是属于整个数字电路研发过程中的一部分。</span><br><span class="line"></span><br><span class="line">    比如，从组合电路出发的话，就是</span><br><span class="line">    1.  描述功能；</span><br><span class="line">    2.  做真值表；</span><br><span class="line">    3.  根据真值表写出布尔表达式；</span><br><span class="line">    4.  化简布尔表达式（卡诺图）；</span><br><span class="line">    5.  根据布尔表达式画出逻辑电路图；</span><br><span class="line">    6.  使用 verilog 对电路进行编码</span><br><span class="line">        ·电路综合（此处可以通过vivado等EDA得到代码对应的逻辑电路图RTL）；</span><br><span class="line">        ·电路布线（得到根据硬件的实际接口情况完成的电路图）；</span><br><span class="line">        ·生成bit流文件；</span><br><span class="line">        ·进行仿真/生成bin文件，bin文件可以烧写到开发板上</span><br><span class="line">    </span><br><span class="line">    从时序电路出发，大概是（有些知识还在学习之中）</span><br><span class="line">    1.  描述功能；</span><br><span class="line">    2.  做状态转换图（Moore / Mealy）；</span><br><span class="line">    3.  做状态转换表；</span><br><span class="line">    4.  对状态进行 二进制编码 或者 独热编码（被编码的一个状态可能对应多位编码，在新的状态转换表中是多位输入）；</span><br><span class="line">    5.  根据编码后的状态更新状态转换表，并做出状态和输出的对应表；</span><br><span class="line">    6.  根据编码后的状态转换表、输出表（此时类似于真值表形式），做出每一个下一个状态和输出的布尔表达式；</span><br><span class="line">    7.  化简布尔表达式（卡诺图）；</span><br><span class="line">    8.  根据布尔表达式画出逻辑电路图；</span><br><span class="line">    9.  使用 verilog 对电路进行编码</span><br><span class="line">        ·电路综合（此处可以通过vivado等EDA得到代码对应的逻辑电路图RTL）；</span><br><span class="line">        ·电路布线（得到根据硬件的实际接口情况完成的电路图）；</span><br><span class="line">        ·生成bit流文件；</span><br><span class="line">        ·进行仿真/生成bin文件，bin文件可以烧写到开发板上</span><br></pre></td></tr></table></figure>
 <p>也就是说，<strong>Verilog</strong> 对应的是电路图，而不是人的思维方式——是和硬件打交道的方式。高级语言尤其是 Java 和 Python 这样的高度友好的语言，思维方式已经几乎和人的思维差不多，在编码时考虑的是业务的逻辑，人的想法；而要想用好 Verilog，就必须要了解电路，理解电路的思维与工作方式，才能用好这门与之交互的语言——人和机器的几乎直接交流。<br>是的，所有编程语言都应该是一门伟大的艺术——人和机器交互的艺术，交流的艺术，这样的代码才是像基因一样具有灵性的，具有灵魂。<br>而 Verilog 是如此的直接，即使不显得那么灵敏和柔软，但是却是<font size=4 color="skyblue"><strong>直击灵魂的</strong></font>。  </p>
 <p><font size="4" face="华文中宋" style="font-weight:bold" color="skyblue">是的，在向计算机的底层出发，接触人类智慧最深层的灵魂。</font></p>
 <p><code>20:27</code></p>
-<pre><code>    话接上文。
-    就我之后可能要从事的 CNN 算法加速这些工作来说，看来我的主要工作将是把算法的代码通过 verilog 复现在硬件上。
-当然，即使是复现代码，我们要考虑的重点也不是算法的性能了，而重点要放到，如何分配硬件的资源，使得算法对于硬件的
-资源利用率显著提高，从而提高算法性能。当然，前提是要对被研究的算法有较为深入的了解。
-
-    对于我来说，这个过程不会轻松。
-    学，就是学。本来就是学习的时代，更高的平台，应当对自己的要求更高。
-</code></pre>
-
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">    话接上文。</span><br><span class="line">    就我之后可能要从事的 CNN 算法加速这些工作来说，看来我的主要工作将是把算法的代码通过 verilog 复现在硬件上。</span><br><span class="line">当然，即使是复现代码，我们要考虑的重点也不是算法的性能了，而重点要放到，如何分配硬件的资源，使得算法对于硬件的</span><br><span class="line">资源利用率显著提高，从而提高算法性能。当然，前提是要对被研究的算法有较为深入的了解。</span><br><span class="line"></span><br><span class="line">    对于我来说，这个过程不会轻松。</span><br><span class="line">    学，就是学。本来就是学习的时代，更高的平台，应当对自己的要求更高。</span><br></pre></td></tr></table></figure>
             
         </div>
     </div>
@@ -290,7 +242,7 @@ Verilog代码只是属于整个数字电路研发过程中的一部分。
         
         <span class="tag">
             
-            <a href="/tags/verilog" style=color:#ffa2c4>
+            <a href="/tags/verilog" style=color:#03a9f4>
                 verilog
             </a>
         </span>
@@ -337,38 +289,7 @@ Verilog代码只是属于整个数字电路研发过程中的一部分。
 
 <p><strong>示例的代码<code>tmp.v</code>如下：</strong></p>
 <p>  其中<code>tmp</code>是主模块，<code>tmp_test</code>是测试模块。</p>
-<pre><code class="verilog">module tmp (
-    input [1:0] signal,
-    output reg [1:0] flag
-);
-    initial begin // 如果这里使用 always 语句块，则最终输出的总是 x 
-        if (signal == 2&#39;d0) begin
-            flag = 2&#39;d2;
-        end
-        else if (signal == 2&#39;d1) begin
-            flag = 2&#39;d1;
-        end
-        else if (signal == 2&#39;d2) begin
-            flag = 2&#39;d0;
-        end
-    end
-endmodule //tmp
-
-
-module tmp_test;
-wire [1:0] sig;
-wire [1:0] f;
-assign sig = 2&#39;d1;
-tmp uut (
-    .signal(sig),
-    .flag(f)
-);
-initial begin
-    $display(f); // 输出结果
-end
-endmodule // tmp_test
-</code></pre>
-
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> tmp (</span><br><span class="line">    <span class="keyword">input</span> [<span class="number">1</span>:<span class="number">0</span>] signal,</span><br><span class="line">    <span class="keyword">output</span> <span class="keyword">reg</span> [<span class="number">1</span>:<span class="number">0</span>] flag</span><br><span class="line">);</span><br><span class="line">    <span class="keyword">initial</span> <span class="keyword">begin</span> <span class="comment">// 如果这里使用 always 语句块，则最终输出的总是 x </span></span><br><span class="line">        <span class="keyword">if</span> (signal == <span class="number">2&#x27;d0</span>) <span class="keyword">begin</span></span><br><span class="line">            flag = <span class="number">2&#x27;d2</span>;</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (signal == <span class="number">2&#x27;d1</span>) <span class="keyword">begin</span></span><br><span class="line">            flag = <span class="number">2&#x27;d1</span>;</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (signal == <span class="number">2&#x27;d2</span>) <span class="keyword">begin</span></span><br><span class="line">            flag = <span class="number">2&#x27;d0</span>;</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span> <span class="comment">//tmp</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> tmp_test;</span><br><span class="line"><span class="keyword">wire</span> [<span class="number">1</span>:<span class="number">0</span>] sig;</span><br><span class="line"><span class="keyword">wire</span> [<span class="number">1</span>:<span class="number">0</span>] f;</span><br><span class="line"><span class="keyword">assign</span> sig = <span class="number">2&#x27;d1</span>;</span><br><span class="line">tmp uut (</span><br><span class="line">    <span class="variable">.signal</span>(sig),</span><br><span class="line">    <span class="variable">.flag</span>(f)</span><br><span class="line">);</span><br><span class="line"><span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">    <span class="built_in">$display</span>(f); <span class="comment">// 输出结果</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span> <span class="comment">// tmp_test</span></span><br></pre></td></tr></table></figure>
             
         </div>
     </div>
@@ -382,7 +303,7 @@ endmodule // tmp_test
         
         <span class="tag">
             
-            <a href="/tags/verilog" style=color:#ff7d73>
+            <a href="/tags/verilog" style=color:#ffa2c4>
                 verilog
             </a>
         </span>
@@ -420,15 +341,8 @@ endmodule // tmp_test
             
             
             <p><code>23:32</code></p>
-<pre><code>有那么几天没有发博文了。中间去了一趟大连，算是碰了一鼻子灰吧。
-不过还是很有意义的一趟旅行。
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">有那么几天没有发博文了。中间去了一趟大连，算是碰了一鼻子灰吧。</span><br><span class="line">不过还是很有意义的一趟旅行。</span><br><span class="line"></span><br><span class="line">对于Verilog似乎是有那么一点点感觉了。也是将所需要的功能划分为模块，最好是一个模块对应一个功能，就是所谓“低级建模”？吧</span><br><span class="line">当然，在做这个的时候，还是要时不时地核对一下，自己在做的是否与预定的计划相符合。</span><br><span class="line">至少大方向一定要正确。</span><br><span class="line"></span><br><span class="line">所以当前就还是将计划中几个阶临踏踏实实地走完，一个完整而踏实的打基础过程。</span><br></pre></td></tr></table></figure>
 
-对于Verilog似乎是有那么一点点感觉了。也是将所需要的功能划分为模块，最好是一个模块对应一个功能，就是所谓“低级建模”？吧
-当然，在做这个的时候，还是要时不时地核对一下，自己在做的是否与预定的计划相符合。
-至少大方向一定要正确。
-
-所以当前就还是将计划中几个阶临踏踏实实地走完，一个完整而踏实的打基础过程。
-</code></pre>
 <p>想想今天都干了些什么？<br><br><code>温习了之前流水灯、闪耀灯的Verilog代码，更进一步理解了代码思路；</code><br><br><br><code>研究了按键消抖实验的代码思路，对Verilog建模中，模块对应功能的编码方式与思维有了一个更进一步的认识，打算明日再好好研究FPGA开发板上的代码思路与实验现象。对了，如果我开始专门关注和记录这些硬件的实验现象，那也是很有趣的事情。</code></p>
 
             
@@ -444,7 +358,7 @@ endmodule // tmp_test
         
         <span class="tag">
             
-            <a href="/tags/daily" style=color:#00bcd4>
+            <a href="/tags/daily" style=color:#00a596>
                 daily
             </a>
         </span>
@@ -482,9 +396,7 @@ endmodule // tmp_test
             
             
             <p><code>10:20</code></p>
-<pre><code>开始工作
-</code></pre>
-
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">开始工作</span><br></pre></td></tr></table></figure>
             
         </div>
     </div>
@@ -498,7 +410,7 @@ endmodule // tmp_test
         
         <span class="tag">
             
-            <a href="/tags/daily" style=color:#00a596>
+            <a href="/tags/daily" style=color:#ffa2c4>
                 daily
             </a>
         </span>
@@ -536,40 +448,16 @@ endmodule // tmp_test
             
             
             <p><code>9:39</code></p>
-<pre><code>暂时没啥说的。
-今日的企划在昨晚——哦不，凌晨一点左右睡觉之前已经写在oneNote里了。
-先干活儿吧。
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">暂时没啥说的。</span><br><span class="line">今日的企划在昨晚——哦不，凌晨一点左右睡觉之前已经写在oneNote里了。</span><br><span class="line">先干活儿吧。</span><br></pre></td></tr></table></figure>
+
 <p><code>16:56</code></p>
-<pre><code>真的好困啊。千万不能再熬夜了。
-给我，淡定。
-好好干。
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">真的好困啊。千万不能再熬夜了。</span><br><span class="line">给我，淡定。</span><br><span class="line">好好干。</span><br></pre></td></tr></table></figure>
+
 <p><code>18:32</code></p>
-<pre><code>刚刚在尝试Verilog实现优先级电路时，体现出了很多我在Verilog语法上的误区。
-确实只有当看了数字电路的知识之后才能更好地理解Verilog；在语法上一些基本表达式上很栽跟头。
-但是今天我不想看语法了——之后遇到的语法问题，我建议就先急着就行——然后看到语法知识章的时候，好好地加深印象。
-先去买鸡架去了。
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">刚刚在尝试Verilog实现优先级电路时，体现出了很多我在Verilog语法上的误区。</span><br><span class="line">确实只有当看了数字电路的知识之后才能更好地理解Verilog；在语法上一些基本表达式上很栽跟头。</span><br><span class="line">但是今天我不想看语法了——之后遇到的语法问题，我建议就先急着就行——然后看到语法知识章的时候，好好地加深印象。</span><br><span class="line">先去买鸡架去了。</span><br></pre></td></tr></table></figure>
+
 <p><code>19:35</code></p>
-<pre><code>怎么说呢，别人的意见部分地听取。
-不能急，我本来就是要先打基础。
-在学习阶段，基础一定要牢固。还是要执行这一部分任务——先看数字电路的内容，然后是Verilog的教程。
-一定要牢固基础。把路走稳。
-
-不过听取别了意见之后，确实是，我可以大略地规划一下整个过程进度。可能距离我可以阅读相关论文，将算法复现，在板子上做加速，这个基础过程，可能还需要大概两个月。如果是参与到项目中，可能需要半年的时间。因为我要做加速，所以肯定要熟悉FPGA的结构——但是了解这个硬件，就不可能绕开数字电路的基本知识。所以，大体的学习方向应当是对的。
-
-不要打乱自己的进度和节奏，要对自己的安排有信心，即使不是那么完美，即使有疏漏，即使看起来笨拙，也要执行下去——况且，别人的学习能力不见得比你强——要相信自己的学习能力，这一点必须也务必做到。我必须逐步找回，或者说是建立起对自己的信息，对自己判断和执行结果具有预估性和可行性，即使一次不可能那么顺利甚至不成功，但是必须要做，因为之后在很多很多的生活场合，我做判断和企划的代价将更大——我为自己争取了三年的读研缓冲期，我在和外界社交的同时也就是这种狭义上地生活交往中，更要记得从自身的建设的明确角度出发——知道自己在干什么，自己需要什么，自己所要建设方面的必要性。就比如现在，必须要认真坚定地执行自己的企划——因为某些方面特别是心里上发育的不成熟，我必须要为自己不断地建立起这种自信——在这种基础上再去逐步把握好自己的其他方面——核心的业务能力一定要坚实。
-
-嗐，好端端的企划工作日志又被我写成随笔了。真是越来越希望这样表达了——好歹也是在表达啊。
-别给自己那么大压力。
-成长，没有错
-需要成长
-同时不要忘了那种对于自我的追求
-美好的事情，还多着呢
-值得开心的事情，还多着呢
-</code></pre>
-
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">怎么说呢，别人的意见部分地听取。</span><br><span class="line">不能急，我本来就是要先打基础。</span><br><span class="line">在学习阶段，基础一定要牢固。还是要执行这一部分任务——先看数字电路的内容，然后是Verilog的教程。</span><br><span class="line">一定要牢固基础。把路走稳。</span><br><span class="line"></span><br><span class="line">不过听取别了意见之后，确实是，我可以大略地规划一下整个过程进度。可能距离我可以阅读相关论文，将算法复现，在板子上做加速，这个基础过程，可能还需要大概两个月。如果是参与到项目中，可能需要半年的时间。因为我要做加速，所以肯定要熟悉FPGA的结构——但是了解这个硬件，就不可能绕开数字电路的基本知识。所以，大体的学习方向应当是对的。</span><br><span class="line"></span><br><span class="line">不要打乱自己的进度和节奏，要对自己的安排有信心，即使不是那么完美，即使有疏漏，即使看起来笨拙，也要执行下去——况且，别人的学习能力不见得比你强——要相信自己的学习能力，这一点必须也务必做到。我必须逐步找回，或者说是建立起对自己的信息，对自己判断和执行结果具有预估性和可行性，即使一次不可能那么顺利甚至不成功，但是必须要做，因为之后在很多很多的生活场合，我做判断和企划的代价将更大——我为自己争取了三年的读研缓冲期，我在和外界社交的同时也就是这种狭义上地生活交往中，更要记得从自身的建设的明确角度出发——知道自己在干什么，自己需要什么，自己所要建设方面的必要性。就比如现在，必须要认真坚定地执行自己的企划——因为某些方面特别是心里上发育的不成熟，我必须要为自己不断地建立起这种自信——在这种基础上再去逐步把握好自己的其他方面——核心的业务能力一定要坚实。</span><br><span class="line"></span><br><span class="line">嗐，好端端的企划工作日志又被我写成随笔了。真是越来越希望这样表达了——好歹也是在表达啊。</span><br><span class="line">别给自己那么大压力。</span><br><span class="line">成长，没有错</span><br><span class="line">需要成长</span><br><span class="line">同时不要忘了那种对于自我的追求</span><br><span class="line">美好的事情，还多着呢</span><br><span class="line">值得开心的事情，还多着呢</span><br></pre></td></tr></table></figure>
             
         </div>
     </div>
@@ -610,32 +498,15 @@ endmodule // tmp_test
             
             
             <p><code>9:21</code></p>
-<pre><code>刚起床没多久。
-准备工作吧。
-又是个晴天。
-想了一下，关于博客的记述，主要还是使用markdown吧。方便一些。
-如果想更改样式，等到有时间来更改这个hexo的模板吧。至少现在不想。
-markdown够用了。
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">刚起床没多久。</span><br><span class="line">准备工作吧。</span><br><span class="line">又是个晴天。</span><br><span class="line">想了一下，关于博客的记述，主要还是使用markdown吧。方便一些。</span><br><span class="line">如果想更改样式，等到有时间来更改这个hexo的模板吧。至少现在不想。</span><br><span class="line">markdown够用了。</span><br></pre></td></tr></table></figure>
 <p>今天要做的事情啊：</p>
 <ol>
 <li> <strong>《数字设计》</strong> 教材第二章完结和总结，并使用Verilog再编写一个器件，比如<font color="lightskyblue"><strong>七段数码管</strong></font>;</li>
 <li> 看一点 <font color="forestgreen"> <strong>CNN</strong> </font>相关的知识，可以继续学习 <strong>Standford</strong> 的教程；</li>
-<li> 中午看一点点 <font color="orange"> <strong>应用概率论</strong> </font>叭，看看叭。<pre><code>还有一个要注意的事情。做这些企划，我应当求少求精。
-即使一天只做两件事情。
-是的我觉得一天只做两件事情就够了。
-宁缺毋滥，要不断有成就感。
-比如今天就是，数字设计，和应用概率论，本质上就可以了。
-</code></pre>
-</li>
+<li> 中午看一点点 <font color="orange"> <strong>应用概率论</strong> </font>叭，看看叭。<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">还有一个要注意的事情。做这些企划，我应当求少求精。</span><br><span class="line">即使一天只做两件事情。</span><br><span class="line">是的我觉得一天只做两件事情就够了。</span><br><span class="line">宁缺毋滥，要不断有成就感。</span><br><span class="line">比如今天就是，数字设计，和应用概率论，本质上就可以了。</span><br></pre></td></tr></table></figure></li>
 </ol>
 <p><code>23:20</code></p>
-<pre><code>今天搞移动硬盘的时候出了点“事故”。
-基本上没怎么用就坏了。
-可能是我文件太大？
-我怀疑是其年久未用其实其中磁头已损坏。
-玛德，先补今天的任务吧。不想多说了。
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">今天搞移动硬盘的时候出了点“事故”。</span><br><span class="line">基本上没怎么用就坏了。</span><br><span class="line">可能是我文件太大？</span><br><span class="line">我怀疑是其年久未用其实其中磁头已损坏。</span><br><span class="line">玛德，先补今天的任务吧。不想多说了。</span><br></pre></td></tr></table></figure>
 
             
         </div>
@@ -677,15 +548,11 @@ markdown够用了。
             
             
             <p><code>16:35</code></p>
-<pre><code>开始逐渐对verilog有点上头了。
-昨天配置好了idea编辑verilog的环境。即使只是可编辑，但是很好看，开发的心情舒服多了。
-看了些数字电路的基础，了解了一些基本器件，用verilog写写这些器件，感觉也会很好。
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">开始逐渐对verilog有点上头了。</span><br><span class="line">昨天配置好了idea编辑verilog的环境。即使只是可编辑，但是很好看，开发的心情舒服多了。</span><br><span class="line">看了些数字电路的基础，了解了一些基本器件，用verilog写写这些器件，感觉也会很好。</span><br></pre></td></tr></table></figure>
+
 <p><code>18:21</code></p>
-<pre><code>刚刚使用 Verilog 实现了复用器 multiplexer，idea编程，VScode检查语法，Vivado生成RTL。
-小小过程，小小器件，做的过程中暴露了verilog语法中一些知识漏洞和小盲区（比如位运算符、逻辑运算符之类的）——当然这些形容还是有点为之过早，
-我学习Verilog才刚刚开始，这个语言有很多值得我研究的东西。
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">刚刚使用 Verilog 实现了复用器 multiplexer，idea编程，VScode检查语法，Vivado生成RTL。</span><br><span class="line">小小过程，小小器件，做的过程中暴露了verilog语法中一些知识漏洞和小盲区（比如位运算符、逻辑运算符之类的）——当然这些形容还是有点为之过早，</span><br><span class="line">我学习Verilog才刚刚开始，这个语言有很多值得我研究的东西。</span><br></pre></td></tr></table></figure>
+
 </br>
 
 <!DOCTYPE html>
@@ -715,12 +582,8 @@ markdown够用了。
 </p>
 
 <p><code>23:53</code></p>
-<pre><code>好的，再总结一下，今天的两件事情。一个是学习了复用器的逻辑电路和 Verilog 的代码实现；
-另一个就是对于博客的个性化设计。
-当然，其实发现，更好的方式应当是从该博客模板的原生定义中去修改，我自定义的模板可能与之有冲突。
-好了，要去准备睡觉了。
-Good night, baby
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">好的，再总结一下，今天的两件事情。一个是学习了复用器的逻辑电路和 Verilog 的代码实现；</span><br><span class="line">另一个就是对于博客的个性化设计。</span><br><span class="line">当然，其实发现，更好的方式应当是从该博客模板的原生定义中去修改，我自定义的模板可能与之有冲突。</span><br><span class="line">好了，要去准备睡觉了。</span><br><span class="line">Good night, baby</span><br></pre></td></tr></table></figure>
+
 </div>
 
 </body>
@@ -768,10 +631,9 @@ Good night, baby
             
             <h3 id="事先说明"><a href="#事先说明" class="headerlink" title="事先说明"></a>事先说明</h3><p>猜猜我要说什么呢？<br>是这样的。在自学的路上，自我总结是个很重要的步骤。<br>一个是指导下一步企划事项的进行；另一个便是至少知道自己最近都干了什么。不至于自我迷失。<br>避免将自我学习搞成相互竞争而逐渐失去方向。</p>
 <p>顺便也要好好地维护一下我的 <strong>博客</strong> 。</p>
-<pre><code>写写企划
-</code></pre>
-<pre><code>做做总结
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">写写企划</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">做做总结</span><br></pre></td></tr></table></figure>
+
 <p>今天就开始。</p>
 
             
