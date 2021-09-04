@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SEANAMO || Verilog 简单的测试代码注意事项</title>
+    <title>SEANAMO || Verilog 代码的思维顺序</title>
     <meta name="author" content="Seana">
     <meta name="description" content=" ">
     <meta name="keywords" content=" ">
@@ -169,7 +169,7 @@
 <link rel="stylesheet" href="/css/post-body.css">
 <div class="article">
     <div>
-        <h1>Verilog 简单的测试代码注意事项 </h1>
+        <h1>Verilog 代码的思维顺序 </h1>
     </div>
     <div class="info">
         <span class="date">
@@ -190,7 +190,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/verilog" style=color:#ff7d73>
+                <a href="/tags/verilog" style=color:#1bccbc>
                     verilog
                 </a>
             </span>
@@ -200,47 +200,7 @@
     </div>
 
     <div class="content" v-pre>
-        <p><strong>在主模块中注意：</strong><br><br></p>
-<p><code>原模块中的 output 类型接口可以声明为 reg 类型，但是 input 接口不能声明为 reg</code>;<br><br><br><br></p>
-<p><strong>在测试模块中注意：</strong></p>
-<p><code>1. 在测试模块中，声明的变量一定都是 wire 类型的</code>;<br><br></p>
-<p><code>2. 测试模块的模块声明中没有变量</code>;<br><br></p>
-<p><code>3. 原模块与测试模块中各个变量所声明的长度必须一致</code>。</p>
-<br>
-
-<p><strong>示例的代码<code>tmp.v</code>如下：</strong></p>
-<p>  其中<code>tmp</code>是主模块，<code>tmp_test</code>是测试模块。</p>
-<pre><code class="verilog">module tmp (
-    input [1:0] signal,
-    output reg [1:0] flag
-);
-    initial begin // 如果这里使用 always 语句块，则最终输出的总是 x 
-        if (signal == 2&#39;d0) begin
-            flag = 2&#39;d2;
-        end
-        else if (signal == 2&#39;d1) begin
-            flag = 2&#39;d1;
-        end
-        else if (signal == 2&#39;d2) begin
-            flag = 2&#39;d0;
-        end
-    end
-endmodule //tmp
-
-
-module tmp_test;
-wire [1:0] sig;
-wire [1:0] f;
-assign sig = 2&#39;d1;
-tmp uut (
-    .signal(sig),
-    .flag(f)
-);
-initial begin
-    $display(f); // 输出结果
-end
-endmodule // tmp_test
-</code></pre>
+        <p><code>17:05</code></p>
 
     </div>
 
