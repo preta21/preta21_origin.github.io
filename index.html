@@ -313,7 +313,202 @@ def decode(code, path):
         <div class="content" v-pre>
             
             
-            <pre><code>分析这个代码的关键是，理解最终的输出逻辑表达式。
+            <h3 id="实验背景"><a href="#实验背景" class="headerlink" title="实验背景"></a>实验背景</h3><p>按键被用户按下或者松开时会产生抖动，电平不稳定。  </p>
+<h3 id="实验环境"><a href="#实验环境" class="headerlink" title="实验环境"></a>实验环境</h3><p>Alinx 7325 FPGA 开发板、Vivado 2020.2、idea/vscode(美观的代码编辑)</p>
+<h3 id="实验目的和内容"><a href="#实验目的和内容" class="headerlink" title="实验目的和内容"></a>实验目的和内容</h3><p>设计 <strong>Verilog</strong> 程序，通过计数计时的方式来判断按键被按下或者松开时是否稳定，是否真的为低电平或者高电平。<br>按键按下时，判断为电平稳定后，程序中计数器加一，通过开发板上的<code>led</code>灯来显示计数结果。  </p>
+<h3 id="程序设计"><a href="#程序设计" class="headerlink" title="程序设计"></a>程序设计</h3><p>程序设计中分为计数模块、消抖模块和综合模块三部分。<br><code>计数模块</code>是用来对按键出发的稳定电平变化进行计数的。每次成功的按键变化会触发计数模块加一，从0开始，<br>该结果实时更新在开发板的四个led灯上。也就是输出实验现象。<br><code>消抖模块</code>是用来判断按键是否稳定的；<br><code>综合模块</code>最后统一对<code>消抖模块</code>和<code>计数模块</code>进行了综合调用。实现实验功能。</p>
+<p><code>计数模块</code>的逻辑最为简单，代码如下：</p>
+<pre><code class="cpp">
+/**
+* @Des: 按键稳定时间（保持时间）计数（10ms here）
+        代码中变量 data 的自增 1 应当是 1ms
+* @Author: preta
+* @Date: 2021-9-5
+*/
+
+module count_m10 (
+    input clk,
+    input rst_n,
+    input en, // 使能信号
+    input clr, // 计数同步复位
+    output reg[3:0] data, // 计数值
+    output reg t // 寄存使能信号
+);
+
+    always @ (posedge clk or negedge rst_n)
+        begin
+            if (rst_n == 0)
+                begin
+                    data &lt;= 4&#39;d0;
+                    t &lt;= 1&#39;d0;
+                end
+            else if (clr)
+                begin
+                    data &lt;= 4&#39;d0;
+                    t &lt;= 1&#39;d0;
+                end
+            else if (en)
+                begin
+                    if (data == 4&#39;d9)
+                        begin
+                            t &lt;= 1&#39;b1; // 计数到9（0~9）——对应输出到 key_debounce.v模块中，led 显示计数结果
+                            data &lt;= 4&#39;d0;
+                        end
+                    else
+                        begin
+                            t &lt;= 1&#39;b0;
+                            data &lt;= data + 4&#39;d1;
+                        end
+                end
+            else
+                t &lt;= 1&#39;b0;
+        end
+
+endmodule
+</code></pre>
+<p>然后是<code>消抖模块</code>代码</p>
+<pre><code class="cpp">`timescale 1ns/100ps
+
+/**
+* @Des: 按键消抖模块
+* @Author: preta
+* @Date: 2021-9-4
+*/
+
+module ax_debounce (
+    input clk,
+    input rst,
+    input button_in,
+    output reg button_posedge,
+    output reg button_negedge,
+    output reg button_out
+);
+
+    parameter N = 32; // 计时器位宽
+    parameter FREQ = 200; // 时钟频率单位：MHz 频率(frequency)
+    parameter MAX_TIME = 20; // 单位：ms，抖动判断时间，20ms？
+    localparam TIMER_MAX_VAL = MAX_TIME * 1000 * FREQ; // ms(10^-3) * MHz(10^6) = 10^3 = 1000; 这里的值应该是最防抖过程中的最大计数次数
+
+    reg [N-1:0] q_reg; //
+    reg [N-1:0] q_next;
+    reg DFF1, DFF2; // 输入 D 触发器
+    wire q_add; // 标志位
+    wire q_reset;
+    reg button_out_d0;
+
+    assign q_reset = (DFF1 ^ DFF2); // 异或运算，同则为0，不同则为1
+    assign q_add = ~(q_reg == TIMER_MAX_VAL); // reg计数到 TIMER_MAX_VAL 则停止计数；
+
+
+    always @ (q_reset, q_add, q_reg)
+        begin
+            case (&#123;q_reset, q_add&#125;)
+                2&#39;b00:
+                    q_next &lt;= q_reg;
+                2&#39;b01:
+                    q_next &lt;= q_reg + 1;
+                default :
+                    // 复位
+                    q_next &lt;= &#123;N&#123;1&#39;b0&#125;&#125;;
+            endcase
+        end
+
+    // 触发器输入，q值更新
+    always @ (posedge clk or posedge rst)
+        begin
+            if (rst == 1&#39;b1)
+                begin
+                    DFF1 &lt;= 1&#39;b0;
+                    DFF2 &lt;= 1&#39;b0;
+                    q_reg &lt;= &#123;N&#123;1&#39;b0&#125;&#125;;
+                end
+            else
+                begin
+                    DFF1 &lt;= button_in;
+                    DFF2 &lt;= DFF1;
+                    q_reg &lt;= q_next;
+                end
+        end
+
+    // 计数控制 button_out
+    always @ (posedge clk or posedge rst)
+        begin
+            if (rst == 1&#39;b1)
+                button_out &lt;= 1&#39;b1;
+            else if (q_reg == TIMER_MAX_VAL)
+                button_out &lt;= DFF2;
+            else
+                button_out &lt;= button_out;
+        end
+
+    // 计数控制 button_out_d0
+    always @ (posedge clk or posedge rst)
+        begin
+            if (rst == 1&#39;b1)
+                begin
+                    button_out_d0 &lt;= 1&#39;b1;
+                    button_posedge &lt;= 1&#39;b0;
+                    button_negedge &lt;= 1&#39;b0;
+                end
+            else
+                begin
+                    button_out_d0 &lt;= button_out;
+                    button_posedge &lt;= ~button_out_d0 &amp; button_out;
+                    button_negedge &lt;= button_out_d0 &amp; ~button_out;
+                end
+        end
+
+endmodule
+</code></pre>
+<p>最后是<code>综合模块</code>：</p>
+<pre><code class="cpp">/**
+* @Des:
+* @Author: preta
+* @Date: 2021-9-6
+*/
+
+module key_debounce (
+    input sys_clk_p,
+    input sys_clk_n,
+    input rst_n,
+    input key,
+    output [3:0] led
+);
+
+    wire sys_clk;
+    IBUFGDS u_ibufg_sys_clk (
+        .I (sys_clk_p),
+        .IB (sys_clk_n),
+        .O (sys_clk)
+    );
+
+    wire button_negedge; // 键下降沿
+    ax_debounce ax_debounce_m0 (
+        .clk (sys_clk),
+        .rst (~rst_n),
+        .button_in (key),
+        .button_posedge (),
+        // 只获取按键的下降沿信号（按键按下），这里只对这个接口进行了赋值
+        .button_negedge (button_negedge),
+        .button_out ()
+    );
+
+    wire [3:0] count;
+    wire t0;
+    count_m10 count10_m0 (
+        .clk (sys_clk),
+        .rst_n (rst_n),
+        .en (button_negedge),
+        .clr (1&#39;b0),
+        .data (count),
+        .t (t0)
+    );
+    assign led = count;
+
+endmodule
+</code></pre>
+<p>说实话，即使是按照电路图对照代码来解读，也还没能完全读懂；但是，读这项代码的过程，让我更熟悉Verilog了吧。<br>我有信心将之后的实验继续做下去，暂时不懂的可以先放一放。之后慢慢随着经验消释和理解。</p>
+<pre><code>分析这个代码的关键是，理解最终的输出逻辑表达式。
 尝试按照时序电路的分析流程进行分析。
 在此之前，是有必要将时序部分的数字电路内容学习完成。
 </code></pre>
@@ -356,7 +551,7 @@ Vivado开发的原语设置开发板时钟信号的原语语句块。至少现�
         
         <span class="tag">
             
-            <a href="/tags/verilog" style=color:#00a596>
+            <a href="/tags/verilog" style=color:#03a9f4>
                 verilog
             </a>
         </span>
@@ -407,7 +602,7 @@ Vivado开发的原语设置开发板时钟信号的原语语句块。至少现�
         
         <span class="tag">
             
-            <a href="/tags/概率论" style=color:#00a596>
+            <a href="/tags/概率论" style=color:#00bcd4>
                 概率论
             </a>
         </span>
@@ -514,7 +709,7 @@ Verilog代码只是属于整个数字电路研发过程中的一部分。
         
         <span class="tag">
             
-            <a href="/tags/verilog" style=color:#ff7d73>
+            <a href="/tags/verilog" style=color:#00a596>
                 verilog
             </a>
         </span>
@@ -606,7 +801,7 @@ endmodule // tmp_test
         
         <span class="tag">
             
-            <a href="/tags/verilog" style=color:#00a596>
+            <a href="/tags/verilog" style=color:#ffa2c4>
                 verilog
             </a>
         </span>
@@ -668,7 +863,7 @@ endmodule // tmp_test
         
         <span class="tag">
             
-            <a href="/tags/daily" style=color:#ff7d73>
+            <a href="/tags/daily" style=color:#00a596>
                 daily
             </a>
         </span>
@@ -722,7 +917,7 @@ endmodule // tmp_test
         
         <span class="tag">
             
-            <a href="/tags/daily" style=color:#ffa2c4>
+            <a href="/tags/daily" style=color:#00bcd4>
                 daily
             </a>
         </span>
