@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SEANAMO || Verilog 简单的测试代码注意事项</title>
+    <title>SEANAMO || Verilog实验分析1-按键消抖模块设计</title>
     <meta name="author" content="Seana">
     <meta name="description" content=" ">
     <meta name="keywords" content=" ">
@@ -169,7 +169,7 @@
 <link rel="stylesheet" href="/css/post-body.css">
 <div class="article">
     <div>
-        <h1>Verilog 简单的测试代码注意事项 </h1>
+        <h1>Verilog实验分析1-按键消抖模块设计 </h1>
     </div>
     <div class="info">
         <span class="date">
@@ -190,7 +190,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/verilog" style=color:#00bcd4>
+                <a href="/tags/verilog" style=color:#03a9f4>
                     verilog
                 </a>
             </span>
@@ -200,46 +200,34 @@
     </div>
 
     <div class="content" v-pre>
-        <p><strong>在主模块中注意：</strong><br><br></p>
-<p><code>原模块中的 output 类型接口可以声明为 reg 类型，但是 input 接口不能声明为 reg</code>;<br><br><br><br></p>
-<p><strong>在测试模块中注意：</strong></p>
-<p><code>1. 在测试模块中，声明的变量一定都是 wire 类型的</code>;<br><br></p>
-<p><code>2. 测试模块的模块声明中没有变量</code>;<br><br></p>
-<p><code>3. 原模块与测试模块中各个变量所声明的长度必须一致</code>。</p>
-<br>
-
-<p><strong>示例的代码<code>tmp.v</code>如下：</strong></p>
-<p>  其中<code>tmp</code>是主模块，<code>tmp_test</code>是测试模块。</p>
-<pre><code class="verilog">module tmp (
-    input [1:0] signal,
-    output reg [1:0] flag
-);
-    initial begin // 如果这里使用 always 语句块，则最终输出的总是 x 
-        if (signal == 2&#39;d0) begin
-            flag = 2&#39;d2;
-        end
-        else if (signal == 2&#39;d1) begin
-            flag = 2&#39;d1;
-        end
-        else if (signal == 2&#39;d2) begin
-            flag = 2&#39;d0;
-        end
-    end
-endmodule //tmp
-
-
-module tmp_test;
-wire [1:0] sig;
-wire [1:0] f;
-assign sig = 2&#39;d1;
-tmp uut (
-    .signal(sig),
-    .flag(f)
-);
-initial begin
-    $display(f); // 输出结果
-end
-endmodule // tmp_test
+        <pre><code>分析这个代码的关键是，理解最终的输出逻辑表达式。
+尝试按照时序电路的分析流程进行分析。
+在此之前，是有必要将时序部分的数字电路内容学习完成。
+</code></pre>
+<pre><code>既要有研究生对于学习该有的严谨，也要在学习过程中从容不迫。
+不管遇到来自于外界的如何竞争与挑战，保持敌动我不动，以不变应万变之原则。
+铭记自己的使命和职责，铭记自己的目标而不乱。
+</code></pre>
+<pre><code>我发现，在计算机的学习过程中，很多在思路上发生误解的事情，其原罪，可能都是数学基础的问题；
+数学这个东西很锻炼思维。包括物理上的思维——这些基础学科的好坏确实能在一定程度上决定日后的
+深造程度，是否能走远。可以先留意一下对数学的学习——因为就在刚才，那种思路敞开的感觉真好。
+</code></pre>
+<pre><code>算是和这个实验折腾了一天吧。
+尝试使用状态转换图分析也好、分析代码也好，学习数电也好——虽然代码还是没怎么看懂，但是我差不多
+知道他每一语句块的作用是什么，但是一些关键的表达式逻辑我还是不太清楚为什么这么写——或许真的是
+经验所致？总结的代码模板一样的东西？
+不过在尝试使用Vivado同步程序、完成布线、接着生成bit文件的时候，出了点问题——排查后发现，是在
+Vivado工程中，示例代码的位置找错了——而且对比发现，和正确位置中示例代码不同的是，多了一个使用
+Vivado开发的原语设置开发板时钟信号的原语语句块。至少现在再看到这个原语语句不再陌生了。
+也是对Vivado的使用增进了了解吧。
+</code></pre>
+<pre><code>在Alinx 7325开发板上将这个示例运行了。终于注意到实验现象是每按一次按键，实现计数器加一，并将结果以LED形式显示。
+从0000加到1001（0~9）。这个开发板的例程好是好，但是就像这样，直到最后一步才会介绍实验的现象，给前期的代码理解
+造成了一些不变。
+不过也还好，因为最开始实验现象和例程中介绍的不一样，通过自己复写的代码和示例源码的比较，又发现了一些关于硬件理
+解上的问题。在编写.xcd文件中，对两个按键进行引脚分配时，采用的 IOSTRANDARD 写错，导致代码烧录之后开发板的风扇
+一直转动。还有，这块开发板的系统时钟是 200MHz，而可编程时钟源是 50MHz，实验中一般使用的 sys_clk_p 就是系统时钟源。
+似乎涉及到时钟源的代码，每次都要使用到相关的 Vivado 原语。
 </code></pre>
 
     </div>

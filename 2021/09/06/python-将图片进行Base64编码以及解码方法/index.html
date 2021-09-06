@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SEANAMO || Verilog 简单的测试代码注意事项</title>
+    <title>SEANAMO || python 将图片进行Base64编码以及解码方法</title>
     <meta name="author" content="Seana">
     <meta name="description" content=" ">
     <meta name="keywords" content=" ">
@@ -169,14 +169,14 @@
 <link rel="stylesheet" href="/css/post-body.css">
 <div class="article">
     <div>
-        <h1>Verilog 简单的测试代码注意事项 </h1>
+        <h1>python 将图片进行Base64编码以及解码方法 </h1>
     </div>
     <div class="info">
         <span class="date">
             <span class="icon">
                 <a-icon type="calendar" theme="filled" />
             </span>
-            2021/9/4
+            2021/9/6
         </span>
 
         
@@ -190,8 +190,8 @@
             
             <span class="tag">
                 
-                <a href="/tags/verilog" style=color:#00bcd4>
-                    verilog
+                <a href="/tags/python" style=color:#ffa2c4>
+                    python
                 </a>
             </span>
             
@@ -200,46 +200,36 @@
     </div>
 
     <div class="content" v-pre>
-        <p><strong>在主模块中注意：</strong><br><br></p>
-<p><code>原模块中的 output 类型接口可以声明为 reg 类型，但是 input 接口不能声明为 reg</code>;<br><br><br><br></p>
-<p><strong>在测试模块中注意：</strong></p>
-<p><code>1. 在测试模块中，声明的变量一定都是 wire 类型的</code>;<br><br></p>
-<p><code>2. 测试模块的模块声明中没有变量</code>;<br><br></p>
-<p><code>3. 原模块与测试模块中各个变量所声明的长度必须一致</code>。</p>
-<br>
+        <p>在 <code>markdown</code> 上使用图片，想将图片保存在 <code>markdown</code> 文件里面而不是直接找本地文件。<br>那么需要将图片进行 <code>Base64</code> 编码。<br>代码如下，顺便看看线上博客对python代码的显示效果如何：</p>
+<pre><code class="python">import base64 as b64
 
-<p><strong>示例的代码<code>tmp.v</code>如下：</strong></p>
-<p>  其中<code>tmp</code>是主模块，<code>tmp_test</code>是测试模块。</p>
-<pre><code class="verilog">module tmp (
-    input [1:0] signal,
-    output reg [1:0] flag
-);
-    initial begin // 如果这里使用 always 语句块，则最终输出的总是 x 
-        if (signal == 2&#39;d0) begin
-            flag = 2&#39;d2;
-        end
-        else if (signal == 2&#39;d1) begin
-            flag = 2&#39;d1;
-        end
-        else if (signal == 2&#39;d2) begin
-            flag = 2&#39;d0;
-        end
-    end
-endmodule //tmp
+def encode(local_path, save_path):
+    &quot;&quot;&quot;
+    将图片编码：Base64，并保存到 save_path 之中
+    @param: local_path 需要编码的图片文件的路径
+    @param: save_path 保存编码结果的文件路径
+    &quot;&quot;&quot;
+    # 二进制方式打开文件
+    pic = open(local_path, &#39;rb&#39;)
+    pic_encode = b64.b64encode(pic.read())
+    data = open(save_path, &#39;wb&#39;)
+    data.write(pic_encode)
+    pic.close()
+    data.close()
 
+def decode(code, path):
+    &quot;&quot;&quot;
+    将Base64编码的图片还原为图片文件
+    @param: code 图片的base64编码
+    @param: path 要保存的路径
+    &quot;&quot;&quot;
+    data = b64.b64decode(code)
+    img = open(path, &#39;wb&#39;)
+    img.write(data)
+    img.close()
 
-module tmp_test;
-wire [1:0] sig;
-wire [1:0] f;
-assign sig = 2&#39;d1;
-tmp uut (
-    .signal(sig),
-    .flag(f)
-);
-initial begin
-    $display(f); // 输出结果
-end
-endmodule // tmp_test
+# encode(&#39;source/_posts/images/beauty.png&#39;, &#39;source/_posts/images/encode/beauty.txt&#39;);
+# decode(open(&#39;source/_posts/images/encode/beauty.txt&#39;).read(), &#39;source/_posts/images/beauty2.png&#39;)
 </code></pre>
 
     </div>

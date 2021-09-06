@@ -197,6 +197,168 @@
 
 <div class="post">
 
+    <a href="/2021/09/06/python-将图片进行Base64编码以及解码方法/">
+        <h2>
+            python 将图片进行Base64编码以及解码方法
+        </h2>
+    </a>
+
+    <div class="category-and-date">
+
+        
+
+        <span class="date">
+            <span class="icon">
+                <a-icon type="calendar" theme="filled" />
+            </span>
+            2021/9/6
+        </span>
+
+    </div>
+
+    <div class="excerpt">
+        <div class="content" v-pre>
+            
+            
+            <p>在 <code>markdown</code> 上使用图片，想将图片保存在 <code>markdown</code> 文件里面而不是直接找本地文件。<br>那么需要将图片进行 <code>Base64</code> 编码。<br>代码如下，顺便看看线上博客对python代码的显示效果如何：</p>
+<pre><code class="python">import base64 as b64
+
+def encode(local_path, save_path):
+    &quot;&quot;&quot;
+    将图片编码：Base64，并保存到 save_path 之中
+    @param: local_path 需要编码的图片文件的路径
+    @param: save_path 保存编码结果的文件路径
+    &quot;&quot;&quot;
+    # 二进制方式打开文件
+    pic = open(local_path, &#39;rb&#39;)
+    pic_encode = b64.b64encode(pic.read())
+    data = open(save_path, &#39;wb&#39;)
+    data.write(pic_encode)
+    pic.close()
+    data.close()
+
+def decode(code, path):
+    &quot;&quot;&quot;
+    将Base64编码的图片还原为图片文件
+    @param: code 图片的base64编码
+    @param: path 要保存的路径
+    &quot;&quot;&quot;
+    data = b64.b64decode(code)
+    img = open(path, &#39;wb&#39;)
+    img.write(data)
+    img.close()
+
+# encode(&#39;source/_posts/images/beauty.png&#39;, &#39;source/_posts/images/encode/beauty.txt&#39;);
+# decode(open(&#39;source/_posts/images/encode/beauty.txt&#39;).read(), &#39;source/_posts/images/beauty2.png&#39;)
+</code></pre>
+
+            
+        </div>
+    </div>
+
+    <div class="post-tags">
+        
+        <span class="icon">
+            <a-icon type="tags" theme="filled" />
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/python" style=color:#03a9f4>
+                python
+            </a>
+        </span>
+        
+    </div>
+
+    <a href="/2021/09/06/python-将图片进行Base64编码以及解码方法/ " class="go-post">
+        阅读全文
+    </a>
+</div>
+
+<div class="post">
+
+    <a href="/2021/09/04/Verilog实验分析1-按键消抖模块设计/">
+        <h2>
+            Verilog实验分析1-按键消抖模块设计
+        </h2>
+    </a>
+
+    <div class="category-and-date">
+
+        
+
+        <span class="date">
+            <span class="icon">
+                <a-icon type="calendar" theme="filled" />
+            </span>
+            2021/9/4
+        </span>
+
+    </div>
+
+    <div class="excerpt">
+        <div class="content" v-pre>
+            
+            
+            <pre><code>分析这个代码的关键是，理解最终的输出逻辑表达式。
+尝试按照时序电路的分析流程进行分析。
+在此之前，是有必要将时序部分的数字电路内容学习完成。
+</code></pre>
+<pre><code>既要有研究生对于学习该有的严谨，也要在学习过程中从容不迫。
+不管遇到来自于外界的如何竞争与挑战，保持敌动我不动，以不变应万变之原则。
+铭记自己的使命和职责，铭记自己的目标而不乱。
+</code></pre>
+<pre><code>我发现，在计算机的学习过程中，很多在思路上发生误解的事情，其原罪，可能都是数学基础的问题；
+数学这个东西很锻炼思维。包括物理上的思维——这些基础学科的好坏确实能在一定程度上决定日后的
+深造程度，是否能走远。可以先留意一下对数学的学习——因为就在刚才，那种思路敞开的感觉真好。
+</code></pre>
+<pre><code>算是和这个实验折腾了一天吧。
+尝试使用状态转换图分析也好、分析代码也好，学习数电也好——虽然代码还是没怎么看懂，但是我差不多
+知道他每一语句块的作用是什么，但是一些关键的表达式逻辑我还是不太清楚为什么这么写——或许真的是
+经验所致？总结的代码模板一样的东西？
+不过在尝试使用Vivado同步程序、完成布线、接着生成bit文件的时候，出了点问题——排查后发现，是在
+Vivado工程中，示例代码的位置找错了——而且对比发现，和正确位置中示例代码不同的是，多了一个使用
+Vivado开发的原语设置开发板时钟信号的原语语句块。至少现在再看到这个原语语句不再陌生了。
+也是对Vivado的使用增进了了解吧。
+</code></pre>
+<pre><code>在Alinx 7325开发板上将这个示例运行了。终于注意到实验现象是每按一次按键，实现计数器加一，并将结果以LED形式显示。
+从0000加到1001（0~9）。这个开发板的例程好是好，但是就像这样，直到最后一步才会介绍实验的现象，给前期的代码理解
+造成了一些不变。
+不过也还好，因为最开始实验现象和例程中介绍的不一样，通过自己复写的代码和示例源码的比较，又发现了一些关于硬件理
+解上的问题。在编写.xcd文件中，对两个按键进行引脚分配时，采用的 IOSTRANDARD 写错，导致代码烧录之后开发板的风扇
+一直转动。还有，这块开发板的系统时钟是 200MHz，而可编程时钟源是 50MHz，实验中一般使用的 sys_clk_p 就是系统时钟源。
+似乎涉及到时钟源的代码，每次都要使用到相关的 Vivado 原语。
+</code></pre>
+
+            
+        </div>
+    </div>
+
+    <div class="post-tags">
+        
+        <span class="icon">
+            <a-icon type="tags" theme="filled" />
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/verilog" style=color:#ffa2c4>
+                verilog
+            </a>
+        </span>
+        
+    </div>
+
+    <a href="/2021/09/04/Verilog实验分析1-按键消抖模块设计/ " class="go-post">
+        阅读全文
+    </a>
+</div>
+
+<div class="post">
+
     <a href="/2021/09/04/概率论速通-1/">
         <h2>
             概率论速通-1
@@ -234,7 +396,7 @@
         
         <span class="tag">
             
-            <a href="/tags/概率论" style=color:#00a596>
+            <a href="/tags/概率论" style=color:#ffa2c4>
                 概率论
             </a>
         </span>
@@ -341,7 +503,7 @@ Verilog代码只是属于整个数字电路研发过程中的一部分。
         
         <span class="tag">
             
-            <a href="/tags/verilog" style=color:#03a9f4>
+            <a href="/tags/verilog" style=color:#ffa2c4>
                 verilog
             </a>
         </span>
@@ -433,7 +595,7 @@ endmodule // tmp_test
         
         <span class="tag">
             
-            <a href="/tags/verilog" style=color:#00a596>
+            <a href="/tags/verilog" style=color:#ffa2c4>
                 verilog
             </a>
         </span>
@@ -495,7 +657,7 @@ endmodule // tmp_test
         
         <span class="tag">
             
-            <a href="/tags/daily" style=color:#00bcd4>
+            <a href="/tags/daily" style=color:#ff7d73>
                 daily
             </a>
         </span>
@@ -788,98 +950,6 @@ Good night, baby
     </div>
 
     <a href="/2021/08/26/2021-8-26/ " class="go-post">
-        阅读全文
-    </a>
-</div>
-
-<div class="post">
-
-    <a href="/2021/08/26/事先说明/">
-        <h2>
-            事先说明
-        </h2>
-    </a>
-
-    <div class="category-and-date">
-
-        
-
-        <span class="date">
-            <span class="icon">
-                <a-icon type="calendar" theme="filled" />
-            </span>
-            2021/8/26
-        </span>
-
-    </div>
-
-    <div class="excerpt">
-        <div class="content" v-pre>
-            
-            
-            <h3 id="事先说明"><a href="#事先说明" class="headerlink" title="事先说明"></a>事先说明</h3><p>猜猜我要说什么呢？<br>是这样的。在自学的路上，自我总结是个很重要的步骤。<br>一个是指导下一步企划事项的进行；另一个便是至少知道自己最近都干了什么。不至于自我迷失。<br>避免将自我学习搞成相互竞争而逐渐失去方向。</p>
-<p>顺便也要好好地维护一下我的 <strong>博客</strong> 。</p>
-<pre><code>写写企划
-</code></pre>
-<pre><code>做做总结
-</code></pre>
-<p>今天就开始。</p>
-
-            
-        </div>
-    </div>
-
-    <div class="post-tags">
-        
-        
-    </div>
-
-    <a href="/2021/08/26/事先说明/ " class="go-post">
-        阅读全文
-    </a>
-</div>
-
-<div class="post">
-
-    <a href="/2021/07/20/回归到hexo/">
-        <h2>
-            回归到hexo
-        </h2>
-    </a>
-
-    <div class="category-and-date">
-
-        
-
-        <span class="date">
-            <span class="icon">
-                <a-icon type="calendar" theme="filled" />
-            </span>
-            2021/7/20
-        </span>
-
-    </div>
-
-    <div class="excerpt">
-        <div class="content" v-pre>
-            
-            
-            <h2 id="回归到hexo"><a href="#回归到hexo" class="headerlink" title="回归到hexo"></a>回归到hexo</h2><p>现在在东北大学计算机与科学学院。<br>已经在实验室坐下了，好好想想选什么项目和研究方向呢？<br>最近也是挺烦心的，腿伤还没完全好，可能还得一个月吧；<br>沈阳的天气比我想得要热多了；<br>我这个南方人适应起来这里的环境，比我想得要难多了。<br>确实啊，去一个地方玩儿和在这里生活简直是千差万别。<br>在去玩儿的时候，就感到，多么的轻松，包容这里的一切。<br>但是，真正谈到要在这里生活的时候，还是要接受很多挑战的。</p>
-<p><strong>不过不管怎么说，不必要那么强迫性地要求自己快速适应之类的。</strong><br>就顺其自然，不能为了融合和迎合而委屈自己。自己有自己的生活方式。</p>
-<p>正所谓<code>回归</code>到hexo——在<code>MECHREVO</code>碎屏之后刚寄回来的下周二，终于将Remote-SSH成功地复现在本机上了。</p>
-<p>一切一定要好起来啊！<br>一切一定会好起来的！<br>风雨之后定是彩虹；守得云开见月明。</p>
-<p>哦哦哦对了，这里记录一下本博客的模板源地址：<br><strong><a target="_blank" rel="noopener" href="https://github.com/korilin/hexo-theme-particle">https://github.com/korilin/hexo-theme-particle</a></strong><br>方便之后更改和更新。</p>
-
-            
-        </div>
-    </div>
-
-    <div class="post-tags">
-        
-        
-    </div>
-
-    <a href="/2021/07/20/回归到hexo/ " class="go-post">
         阅读全文
     </a>
 </div>
