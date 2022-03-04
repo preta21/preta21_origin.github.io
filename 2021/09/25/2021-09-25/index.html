@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SEANAMO || family</title>
+    <title>SEANAMO || Sat Sep 25 2021 08:00:00 GMT+0800 (China Standard Time)</title>
     <meta name="author" content="Seana">
     <meta name="description" content=" ">
     <meta name="keywords" content=" ">
@@ -166,115 +166,52 @@
 
                 <div id="main">
                      
-<div class="categories-tags">
-    
-    <div class="all-s">
-        
-        
-        <span>
-            <a href="/tags/daily/" style=background:#ff7d73>
-                <span class="icon">
-                    <a-icon type="tag" theme="filled" />
-                </span>
-                daily
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/tags/LaTex/" style=background:#00a596>
-                <span class="icon">
-                    <a-icon type="tag" theme="filled" />
-                </span>
-                LaTex
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/tags/verilog/" style=background:#00bcd4>
-                <span class="icon">
-                    <a-icon type="tag" theme="filled" />
-                </span>
-                verilog
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/tags/概率论/" style=background:#00a596>
-                <span class="icon">
-                    <a-icon type="tag" theme="filled" />
-                </span>
-                概率论
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/tags/family/" style='background:linear-gradient(120deg, #9abbf7 0%, #ffbbf4 100%)'>
-                <span class="icon">
-                    <a-icon type="tag" theme="filled" />
-                </span>
-                family
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/tags/python/" style=background:#ff7d73>
-                <span class="icon">
-                    <a-icon type="tag" theme="filled" />
-                </span>
-                python
-            </a>
-        </span>
-        
-        
+<link rel="stylesheet" href="/css/post-body.css">
+<div class="article">
+    <div>
+        <h1>Sat Sep 25 2021 08:00:00 GMT+0800 (China Standard Time) </h1>
     </div>
-    <div id="archives">
-        
-        <a-timeline>
-            <a-timeline-item color="#a5c2f5">
-                <a-card hoverable>
-                    <div class="item-time">2022/2/14</div>
-                    <a href="/2022/02/14/电影网站/">
-                        <h3>电影网站</h3>
-                    </a>
-                    <div class="info">
-                        
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <a-icon type="calendar" theme="filled" />
+            </span>
+            2021/9/25
+        </span>
 
-                        
-                        <span class="tags">
-                            <span class="icon">
-                                <a-icon type="tags" theme="filled" />
-                            </span>
-                            
-                            <span class="tag">
-                                
-                                <a href="/tags/family" style=color:#00a596>
-                                    family
-                                </a>
-                            </span>
-                            
-                        </span>
-                        
-                    </div>
-                </a-card>
-            </a-timeline-item>
-        </a-timeline>
+        
+
+        
+
+        <span class="tags">
+            <span class="icon">
+                <a-icon type="tags" theme="filled" />
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/daily" style=color:#00a596>
+                    daily
+                </a>
+            </span>
+            
+        </span>
         
     </div>
-    <script>
-        new Vue({
-            el: '#archives'
-        })
-    </script>
+
+    <div class="content" v-pre>
+        <p>真是感觉比较糟糕的一天。讨厌阴天。<br>说实话，这些事项怎么处理呢？什么是我的总结呢？  </p>
+<p>打算利用服务器来记录自己的学习笔记来着。需要一定的妥善经营。<br>打算将这个项目的学习事项都保存在服务器件上？<br>可能还不太方便。<br>我的想法是，将笔记放在<code>onenote</code>上面；在<code>GitHub</code>上搞一个自己本次的项目分支。<br>有意义地记录自己参与的第一个硬件项目吧。记住咯，生活千万不能颓丧下来，要保持自己的珍贵的战斗力。</p>
+
+    </div>
+
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <div id="comment">
+        <div id="gitalk-container">
+        </div>
+    </div>
+    
 </div>
                      
 <footer id="footer">
@@ -338,6 +275,21 @@
             }
         }
     })
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script>
+    const gitalk = new Gitalk({
+        clientID: '',
+        clientSecret: '',
+        repo: 'hexo-theme-particle',      // The repository of store comments,
+        owner: 'korilin',
+        admin: ['korilin'],
+        language: 'en',
+        id: location.pathname,      // Ensure uniqueness and length less than 50
+        distractionFreeMode: true  // Facebook-like distraction free mode
+    })
+    gitalk.render('gitalk-container')
 </script>
 
 </body>
