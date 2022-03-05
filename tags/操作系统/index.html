@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SEANAMO || Verilog 代码的思维</title>
+    <title>SEANAMO || 操作系统</title>
     <meta name="author" content="Seana">
     <meta name="description" content=" ">
     <meta name="keywords" content=" ">
@@ -166,106 +166,126 @@
 
                 <div id="main">
                      
-<link rel="stylesheet" href="/css/post-body.css">
-<div class="article">
-    <div>
-        <h1>Verilog 代码的思维 </h1>
-    </div>
-    <div class="info">
-        <span class="date">
-            <span class="icon">
-                <a-icon type="calendar" theme="filled" />
-            </span>
-            2021/9/4
-        </span>
-
+<div class="categories-tags">
+    
+    <div class="all-s">
         
-
         
-
-        <span class="tags">
-            <span class="icon">
-                <a-icon type="tags" theme="filled" />
-            </span>
-            
-            <span class="tag">
-                
-                <a href="/tags/verilog" style=color:#00a596>
-                    verilog
-                </a>
-            </span>
-            
+        <span>
+            <a href="/tags/daily/" style=background:#00bcd4>
+                <span class="icon">
+                    <a-icon type="tag" theme="filled" />
+                </span>
+                daily
+            </a>
         </span>
         
+        
+        
+        <span>
+            <a href="/tags/LaTex/" style=background:#00a596>
+                <span class="icon">
+                    <a-icon type="tag" theme="filled" />
+                </span>
+                LaTex
+            </a>
+        </span>
+        
+        
+        
+        <span>
+            <a href="/tags/verilog/" style=background:#03a9f4>
+                <span class="icon">
+                    <a-icon type="tag" theme="filled" />
+                </span>
+                verilog
+            </a>
+        </span>
+        
+        
+        
+        <span>
+            <a href="/tags/概率论/" style=background:#00a596>
+                <span class="icon">
+                    <a-icon type="tag" theme="filled" />
+                </span>
+                概率论
+            </a>
+        </span>
+        
+        
+        
+        <span>
+            <a href="/tags/family/" style=background:#00bcd4>
+                <span class="icon">
+                    <a-icon type="tag" theme="filled" />
+                </span>
+                family
+            </a>
+        </span>
+        
+        
+        
+        <span>
+            <a href="/tags/操作系统/" style='background:linear-gradient(120deg, #9abbf7 0%, #ffbbf4 100%)'>
+                <span class="icon">
+                    <a-icon type="tag" theme="filled" />
+                </span>
+                操作系统
+            </a>
+        </span>
+        
+        
+        
+        <span>
+            <a href="/tags/python/" style=background:#ffa2c4>
+                <span class="icon">
+                    <a-icon type="tag" theme="filled" />
+                </span>
+                python
+            </a>
+        </span>
+        
+        
     </div>
+    <div id="archives">
+        
+        <a-timeline>
+            <a-timeline-item color="#a5c2f5">
+                <a-card hoverable>
+                    <div class="item-time">2022/3/5</div>
+                    <a href="/2022/03/05/装双系统过程总结-一-：win10-Ubuntu21-04/">
+                        <h3>装双系统过程总结(一)：win10+Ubuntu21.04</h3>
+                    </a>
+                    <div class="info">
+                        
 
-    <div class="content" v-pre>
-        <p><code>17:05</code><br><strong>Verilog</strong> 和高级编程语言的不同，我想我现在可以总结上一两点。  </p>
-<pre><code>    高级语言的好处显而易见，其思维是无限接近于人的思想的，按照人的思维方式来完成任务。基本上其实所见即所得。
-所以其做的事情也更高级，从更高的层面，主要是算法这一思想层面去工作研究。如果为高级语言完成的任务进行一个结构分析，  
-那么结果也就是人所想的过程，只不过做一些思维和人性化的美化，是软件工程中进行软件的生命周期分析（需求分析、可行性分析、概要设计、
-详细设计、编码、测试、调试），或是在敏捷开发中，对于每一个用户场景（User Story）进行分析从而得出合理的功能流程。
-整体下来就是要完成人要做的事情。基本的思路是很明确的。
-</code></pre>
-<pre><code>    最近除了在学习《数字电路》的知识，也在看一些Verilog的经典教程，敲敲代码，读读心得之间，也对Verilog逐渐入门——
-当然随着学习的深入，学习的难度也在上升，感觉是自己在给自己上课。也许相对本科时期那种相对宽松的学习时间和环境，
-我当今的效率已经很高了，而且投入与产出目前也比较好。但是，我现在是在硕士阶段，等待我做的不光有前所未有的新课程
-的学习，还有实际要完成的项目，我应当以一个更高的水准来要求自己。
-</code></pre>
-<p>虽然不是很喜欢所看的Verilog教程的作者的语言风格，但是其中有个概念我觉得很对：Verilog语言的作用不是编码，<br>而是<font color="forestgreen" size=4> <strong>建模</strong> </font>。</p>
-<pre><code>    就尤其我目前的学习体验来说，最有收获感的学习过程，莫过于刚学习过数字电路的基础知识，学习了一两个逻辑器件，然后使用
-Verilog实现器件的逻辑；单纯地去复刻别人的代码，即使有代码注释，也很难读懂代码。所以，特别是现在学习Verilog的初期，我觉得
-遵守组合电路或者时序电路的构建思路再来编写代码，很重要。而且，我更深地感觉到，写Verilog的代码，绝不能脱离数字电路这个实体。
-Verilog代码只是属于整个数字电路研发过程中的一部分。
-
-    比如，从组合电路出发的话，就是
-    1.  描述功能；
-    2.  做真值表；
-    3.  根据真值表写出布尔表达式；
-    4.  化简布尔表达式（卡诺图）；
-    5.  根据布尔表达式画出逻辑电路图；
-    6.  使用 verilog 对电路进行编码
-        ·电路综合（此处可以通过vivado等EDA得到代码对应的逻辑电路图RTL）；
-        ·电路布线（得到根据硬件的实际接口情况完成的电路图）；
-        ·生成bit流文件；
-        ·进行仿真/生成bin文件，bin文件可以烧写到开发板上
-    
-    从时序电路出发，大概是（有些知识还在学习之中）
-    1.  描述功能；
-    2.  做状态转换图（Moore / Mealy）；
-    3.  做状态转换表；
-    4.  对状态进行 二进制编码 或者 独热编码（被编码的一个状态可能对应多位编码，在新的状态转换表中是多位输入）；
-    5.  根据编码后的状态更新状态转换表，并做出状态和输出的对应表；
-    6.  根据编码后的状态转换表、输出表（此时类似于真值表形式），做出每一个下一个状态和输出的布尔表达式；
-    7.  化简布尔表达式（卡诺图）；
-    8.  根据布尔表达式画出逻辑电路图；
-    9.  使用 verilog 对电路进行编码
-        ·电路综合（此处可以通过vivado等EDA得到代码对应的逻辑电路图RTL）；
-        ·电路布线（得到根据硬件的实际接口情况完成的电路图）；
-        ·生成bit流文件；
-        ·进行仿真/生成bin文件，bin文件可以烧写到开发板上
-</code></pre>
-<p>也就是说，<strong>Verilog</strong> 对应的是电路图，而不是人的思维方式——是和硬件打交道的方式。高级语言尤其是 Java 和 Python 这样的高度友好的语言，思维方式已经几乎和人的思维差不多，在编码时考虑的是业务的逻辑，人的想法；而要想用好 Verilog，就必须要了解电路，理解电路的思维与工作方式，才能用好这门与之交互的语言——人和机器的几乎直接交流。<br>是的，所有编程语言都应该是一门伟大的艺术——人和机器交互的艺术，交流的艺术，这样的代码才是像基因一样具有灵性的，具有灵魂。<br>而 Verilog 是如此的直接，即使不显得那么灵敏和柔软，但是却是<font size=4 color="skyblue"><strong>直击灵魂的</strong></font>。  </p>
-<p><font size="4" face="华文中宋" style="font-weight:bold" color="skyblue">是的，在向计算机的底层出发，接触人类智慧最深层的灵魂。</font></p>
-<p><code>20:27</code></p>
-<pre><code>    话接上文。
-    就我之后可能要从事的 CNN 算法加速这些工作来说，看来我的主要工作将是把算法的代码通过 verilog 复现在硬件上。
-当然，即使是复现代码，我们要考虑的重点也不是算法的性能了，而重点要放到，如何分配硬件的资源，使得算法对于硬件的
-资源利用率显著提高，从而提高算法性能。当然，前提是要对被研究的算法有较为深入的了解。
-
-    对于我来说，这个过程不会轻松。
-    学，就是学。本来就是学习的时代，更高的平台，应当对自己的要求更高。
-</code></pre>
-
+                        
+                        <span class="tags">
+                            <span class="icon">
+                                <a-icon type="tags" theme="filled" />
+                            </span>
+                            
+                            <span class="tag">
+                                
+                                <a href="/tags/操作系统" style=color:#ffa2c4>
+                                    操作系统
+                                </a>
+                            </span>
+                            
+                        </span>
+                        
+                    </div>
+                </a-card>
+            </a-timeline-item>
+        </a-timeline>
+        
     </div>
-
-    
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-    <div id="comment">
-        <div id="gitalk-container">
-        </div>
-    </div>
-    
+    <script>
+        new Vue({
+            el: '#archives'
+        })
+    </script>
 </div>
                      
 <footer id="footer">
@@ -329,21 +349,6 @@ Verilog代码只是属于整个数字电路研发过程中的一部分。
             }
         }
     })
-</script>
-
-<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-<script>
-    const gitalk = new Gitalk({
-        clientID: '',
-        clientSecret: '',
-        repo: 'hexo-theme-particle',      // The repository of store comments,
-        owner: 'korilin',
-        admin: ['korilin'],
-        language: 'en',
-        id: location.pathname,      // Ensure uniqueness and length less than 50
-        distractionFreeMode: true  // Facebook-like distraction free mode
-    })
-    gitalk.render('gitalk-container')
 </script>
 
 </body>
