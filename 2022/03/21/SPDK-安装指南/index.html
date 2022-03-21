@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SEANAMO || After a sharing meeting</title>
+    <title>SEANAMO || SPDK 安装指南</title>
     <meta name="author" content="Seana">
     <meta name="description" content=" ">
     <meta name="keywords" content=" ">
@@ -169,51 +169,57 @@
 <link rel="stylesheet" href="/css/post-body.css">
 <div class="article">
     <div>
-        <h1>After a sharing meeting </h1>
+        <h1>SPDK 安装指南 </h1>
     </div>
     <div class="info">
         <span class="date">
             <span class="icon">
                 <a-icon type="calendar" theme="filled" />
             </span>
-            2022/3/9
+            2022/3/21
         </span>
 
         
 
-        
-
-        <span class="tags">
-            <span class="icon">
-                <a-icon type="tags" theme="filled" />
-            </span>
-            
-            <span class="tag">
-                
-                <a href="/tags/daily" style=color:#00bcd4>
-                    daily
-                </a>
-            </span>
-            
-        </span>
         
     </div>
 
     <div class="content" v-pre>
-        <p><code>3月9日</code></p>
-<pre><code>说实话，情商确实是需要培养的。
-这已经不是一个能不能的问题，而是必须的，要转换为一个，如何去做的问题。
-我还是那个观点，而且我觉得对于我来说可以长期不变的态度：我的强项是学习能力，通过这个能力去学习更多的知识、技能、素养，来升华自己的能力。
-否则将一无是处。
-学习能力没有被开拓变现的渠道，永远只是个概念，无法发挥出其中巨大的能量。
-当然，更要具有符合客观规律的认识——积累、思考，都是需要时间的，都是急不来的。
-
-老师说的东西、老板说的东西，我理解不了其中的内涵，迟早要吃亏的。听不出话中话。但是我觉得，自己是有这个能力的，察言观色其实我很擅长。
-但是我却没能将这个能力用到同样重要的地方——即使我在情感上的察言观色非常之细致。
-这需要理论的学习，更需要一些经历去体会。
-不光要学着如何和不同的人交际，更要能够及时地体会到话中话。
+        <pre><code>SPDK，一款用于NMVe协议的驱动开发工具。但是由于境内网络原因、版本问题、Python安装问题，将其`github`主页上区区几行命令的执行难度，提升了不少。
+经历过两次痛苦的安装过程（第一次没有好好记录），我决定这一次要好好地记录一回。
 </code></pre>
-<p><strong>或许，这种对于“话中话”的失语，正是我很多时候，无法抓住要点的致命性原因。</strong><br>无法抓中工作的重点、无法从长对话中筛选出对自己真正有用的足够的信息，从而无法集中精力干真正该干的事情；会议报告、课堂上一遍听不懂，<br><br>一定得等到课下自己研究才能取得实质的收获。<br><br>这样很可怕也可悲。<br><br><font color="orange" size=15 face="华文中宋">增强阅读，情商需要培养。</font></p>
+<h2 id="前置环境"><a href="#前置环境" class="headerlink" title="前置环境"></a>前置环境</h2><pre><code>Ubuntu16.04.5 Desktop LST，但是后来自动升级了Ubuntu16.04.7？
+    默认有 Python2.7.12 与Python3.5.2，但是之后还得安装高版本的(3.5的肯定不行，至少需要3.7.5以上的，更低版本的没试过)
+    默认有 g++ 5.4.0
+    安装好了vim，方便编辑，有 VSCode 更好
+    安装好 git
+(安装 SPDK21.01 LST)
+</code></pre>
+<h2 id="安装高版本的Python"><a href="#安装高版本的Python" class="headerlink" title="安装高版本的Python"></a>安装高版本的Python</h2><p><strong>这一步是最关键的一步了，先配好环境，解决后顾之忧</strong></p>
+<h3 id="一-官网下载Python3-7-5，并安装之"><a href="#一-官网下载Python3-7-5，并安装之" class="headerlink" title="一.官网下载Python3.7.5，并安装之"></a>一.官网下载Python3.7.5，并安装之</h3><p><em>我试过官网所谓通过增加apt源来安装高版本Python的方法，但是在Ubuntu16.04.5上不好使</em></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_38977019/article/details/107472381">参考文献1</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/YMY_mine/article/details/103801458">参考文献2</a><br><a target="_blank" rel="noopener" href="https://ubuntuqa.com/zh-tw/article/7722.html">参考文献3</a></p>
+<h4 id="1-python3-7-5官网"><a href="#1-python3-7-5官网" class="headerlink" title="1) python3.7.5官网"></a>1) <a target="_blank" rel="noopener" href="https://www.python.org/downloads/release/python-375/">python3.7.5官网</a></h4><p><img src="SPDK-%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97/python.png" alt="python官网"></p>
+<h4 id="2-我在-home下建立了文件夹python37，放置压缩包，并解压"><a href="#2-我在-home下建立了文件夹python37，放置压缩包，并解压" class="headerlink" title="2) 我在/home下建立了文件夹python37，放置压缩包，并解压"></a>2) 我在<code>/home</code>下建立了文件夹<code>python37</code>，放置压缩包，并解压</h4><p><code>sudo tar -zxvf Python-3.7.5.tgz</code></p>
+<h4 id="3-安装依赖"><a href="#3-安装依赖" class="headerlink" title="3) 安装依赖"></a>3) 安装依赖</h4><p><code>sudo apt-get install libffi-dev</code><br><code>sudo apt install zlib*</code></p>
+<h4 id="4-修改Setup文件"><a href="#4-修改Setup文件" class="headerlink" title="4) 修改Setup文件"></a>4) 修改<code>Setup</code>文件</h4><p><code>cd ~/Python37/Python-3.7.5/Modules</code><br><code>sudo vim Setup</code><br>执行查找命令，在vim模式下输入”\#zlib”，定位该行<br><code>#zlib zlibmodule.c -I$(prefix)/include -L$(exec_prefix)/lib -lz</code><br>去掉注释</p>
+<h4 id="5-进入Python3-7-5解压后的目录，然后执行"><a href="#5-进入Python3-7-5解压后的目录，然后执行" class="headerlink" title="5) 进入Python3.7.5解压后的目录，然后执行"></a>5) 进入Python3.7.5解压后的目录，然后执行</h4><p><code>./configure --prefix=/opt/python3.7</code></p>
+<h4 id="6-编译"><a href="#6-编译" class="headerlink" title="6) 编译"></a>6) 编译</h4><p><code>sudo make</code></p>
+<h4 id="7-执行测试"><a href="#7-执行测试" class="headerlink" title="7) 执行测试"></a>7) 执行测试</h4><p><code>sudo make test</code><br>假如测试未通过，先根据报错解决问题，很可能是是一些依赖问题</p>
+<h4 id="8-安装"><a href="#8-安装" class="headerlink" title="8) 安装"></a>8) 安装</h4><p><code>sudo make install</code></p>
+<h4 id="9-创建软链接"><a href="#9-创建软链接" class="headerlink" title="9) 创建软链接"></a>9) 创建软链接</h4><p><code>sudo ln -s /opt/python3.7/bin/python3.7 /usr/bin/python3.7</code></p>
+<h4 id="10-调整优先级-因为Ubuntu系统自带的python3版本为python3-5-2"><a href="#10-调整优先级-因为Ubuntu系统自带的python3版本为python3-5-2" class="headerlink" title="10) 调整优先级(因为Ubuntu系统自带的python3版本为python3.5.2)"></a>10) 调整优先级(因为Ubuntu系统自带的python3版本为python3.5.2)</h4><p><code>sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.5 1</code><br><code>sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.7 2</code></p>
+<h4 id="11-查看当前Python3版本"><a href="#11-查看当前Python3版本" class="headerlink" title="11) 查看当前Python3版本"></a>11) 查看当前Python3版本</h4><p><code>python3</code></p>
+<h4 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h4><p>Python3 版本自由切换：<br><br><code>sudo update-alternatives --config python3</code><br><br>然后根据提示选择要使用的版本序号<br><br><img src="SPDK-%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97/change.png" alt="更改Python版本"><br><br>Python 版本被更改之后，命令行快捷键、软件无法打开：<br><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_38977019/article/details/107472381">参考文献1</a>的最后</p>
+<h3 id="二-安装-SPDK"><a href="#二-安装-SPDK" class="headerlink" title="二.安装 SPDK"></a>二.安装 SPDK</h3><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/108898992">尝试修改Ubuntu /etc/host.conf 以加速github</a><br>安装过程参考：<code>SPDK</code><a target="_blank" rel="noopener" href="https://github.com/spdk/spdk">官网</a></p>
+<h4 id="1-git-clone-SPDK"><a href="#1-git-clone-SPDK" class="headerlink" title="1) git clone SPDK"></a>1) git clone SPDK</h4><p><code>git clone https://github.com/spdk/spdk</code><br>执行情况依赖于网络情况，多次尝试以期下载完成。</p>
+<h4 id="2-更换版本"><a href="#2-更换版本" class="headerlink" title="2) 更换版本"></a>2) 更换版本</h4><p><code>git tag</code>，查看版本</p>
+<p>这里选择<code>v21.01</code>:<br><br><code>git checkout v21.01</code><br><br><img src="SPDK-%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97/version.png" alt="更改Python版本"><br></p>
+<h4 id="3-下载子模块"><a href="#3-下载子模块" class="headerlink" title="3) 下载子模块"></a>3) 下载子模块</h4><p><code>git submodule update --init</code><br>执行情况依赖于网络情况，多次尝试以期下载完成。</p>
+<h4 id="4-安装依赖"><a href="#4-安装依赖" class="headerlink" title="4) 安装依赖"></a>4) 安装依赖</h4><p><code>./scripts/pkgdep.sh</code></p>
+<h4 id="5-编译"><a href="#5-编译" class="headerlink" title="5) 编译"></a>5) 编译</h4><pre><code>./configure
+make
+</code></pre>
+<h4 id="6-执行测试"><a href="#6-执行测试" class="headerlink" title="6) 执行测试"></a>6) 执行测试</h4><p><code>./test/unit/unittest.sh</code><br><br>如果测试通过了就他妈的下好了。<br><br><img src="SPDK-%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97/test.jpg" alt="更改Python版本"><br></p>
 
     </div>
 
