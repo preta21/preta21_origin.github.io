@@ -236,8 +236,8 @@
 <h4 id="1-python3-7-5官网"><a href="#1-python3-7-5官网" class="headerlink" title="1) python3.7.5官网"></a>1) <a target="_blank" rel="noopener" href="https://www.python.org/downloads/release/python-375/">python3.7.5官网</a></h4><p><img src="SPDK-%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97/python.png" alt="python官网"></p>
 <h4 id="2-我在-home下建立了文件夹python37，放置压缩包，并解压"><a href="#2-我在-home下建立了文件夹python37，放置压缩包，并解压" class="headerlink" title="2) 我在/home下建立了文件夹python37，放置压缩包，并解压"></a>2) 我在<code>/home</code>下建立了文件夹<code>python37</code>，放置压缩包，并解压</h4><p><code>sudo tar -zxvf Python-3.7.5.tgz</code></p>
 <h4 id="3-安装依赖"><a href="#3-安装依赖" class="headerlink" title="3) 安装依赖"></a>3) 安装依赖</h4><p><code>sudo apt-get install libffi-dev</code><br><code>sudo apt install zlib*</code></p>
-<h4 id="4-修改Setup文件"><a href="#4-修改Setup文件" class="headerlink" title="4) 修改Setup文件"></a>4) 修改<code>Setup</code>文件</h4><p><code>cd ~/Python37/Python-3.7.5/Modules</code><br><code>sudo vim Setup</code><br>执行查找命令，在vim模式下输入”\#zlib”，定位该行<br><code>#zlib zlibmodule.c -I$(prefix)/include -L$(exec_prefix)/lib -lz</code><br>去掉注释</p>
-<h4 id="5-进入Python3-7-5解压后的目录，然后执行"><a href="#5-进入Python3-7-5解压后的目录，然后执行" class="headerlink" title="5) 进入Python3.7.5解压后的目录，然后执行"></a>5) 进入Python3.7.5解压后的目录，然后执行</h4><p><code>./configure --prefix=/opt/python3.7</code></p>
+<h4 id="4-修改Setup文件"><a href="#4-修改Setup文件" class="headerlink" title="4) 修改Setup文件"></a>4) 修改<code>Setup</code>文件</h4><p><code>cd ~/Python37/Python-3.7.5/Modules</code><br><code>sudo vim Setup</code><br>执行查找命令：按下shift键进入vim命令模式，输入”/#zlib”，定位该行<br><code>#zlib zlibmodule.c -I$(prefix)/include -L$(exec_prefix)/lib -lz</code><br>去掉注释</p>
+<h4 id="5-进入Python3-7-5解压后的目录，然后执行"><a href="#5-进入Python3-7-5解压后的目录，然后执行" class="headerlink" title="5) 进入Python3.7.5解压后的目录，然后执行"></a>5) 进入Python3.7.5解压后的目录，然后执行</h4><p><code>sudo ./configure --prefix=/opt/python3.7</code></p>
 <h4 id="6-编译"><a href="#6-编译" class="headerlink" title="6) 编译"></a>6) 编译</h4><p><code>sudo make</code></p>
 <h4 id="7-执行测试"><a href="#7-执行测试" class="headerlink" title="7) 执行测试"></a>7) 执行测试</h4><p><code>sudo make test</code><br>假如测试未通过，先根据报错解决问题，很可能是是一些依赖问题</p>
 <h4 id="8-安装"><a href="#8-安装" class="headerlink" title="8) 安装"></a>8) 安装</h4><p><code>sudo make install</code></p>
@@ -374,7 +374,7 @@ make
         
         <span class="tag">
             
-            <a href="/tags/操作系统" style=color:#ff7d73>
+            <a href="/tags/操作系统" style=color:#00bcd4>
                 操作系统
             </a>
         </span>
@@ -510,7 +510,7 @@ Github博客上，一直不能成功地上传图片。可能还是我的仓库�
         
         <span class="tag">
             
-            <a href="/tags/daily" style=color:#00a596>
+            <a href="/tags/daily" style=color:#03a9f4>
                 daily
             </a>
         </span>
@@ -563,7 +563,7 @@ Github博客上，一直不能成功地上传图片。可能还是我的仓库�
         
         <span class="tag">
             
-            <a href="/tags/family" style=color:#ff7d73>
+            <a href="/tags/family" style=color:#03a9f4>
                 family
             </a>
         </span>
@@ -625,7 +625,7 @@ Github博客上，一直不能成功地上传图片。可能还是我的仓库�
         
         <span class="tag">
             
-            <a href="/tags/LaTex" style=color:#00a596>
+            <a href="/tags/LaTex" style=color:#03a9f4>
                 LaTex
             </a>
         </span>
@@ -732,7 +732,7 @@ Github博客上，一直不能成功地上传图片。可能还是我的仓库�
         
         <span class="tag">
             
-            <a href="/tags/daily" style=color:#ffa2c4>
+            <a href="/tags/daily" style=color:#00bcd4>
                 daily
             </a>
         </span>
@@ -825,7 +825,7 @@ def decode(code, path):
         
         <span class="tag">
             
-            <a href="/tags/python" style=color:#00a596>
+            <a href="/tags/python" style=color:#ff7d73>
                 python
             </a>
         </span>
