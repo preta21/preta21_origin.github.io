@@ -193,9 +193,14 @@
     默认有 g++ 5.4.0
     安装好了vim，方便编辑，有 VSCode 更好
     安装好 git
+    ninja、meson，这两个依赖会在之后执行SPDK依赖安装命令时自动安装，不推荐自己安装；如果Python没有配置好，执行依赖安装的时候会报错，
+    提醒你找不到ninja。
 (安装 SPDK21.01 LST)
 </code></pre>
 <h2 id="安装高版本的Python"><a href="#安装高版本的Python" class="headerlink" title="安装高版本的Python"></a>安装高版本的Python</h2><p><strong>这一步是最关键的一步了，先配好环境，解决后顾之忧</strong></p>
+<pre><code>说明一下为什么要先配好Python的版本：
+因为在执行之后的SPDK依赖安装时，使用到pip，如果python版本有问题，就会出现很多恶心的unment问题。
+</code></pre>
 <h3 id="一-官网下载Python3-7-5，并安装之"><a href="#一-官网下载Python3-7-5，并安装之" class="headerlink" title="一.官网下载Python3.7.5，并安装之"></a>一.官网下载Python3.7.5，并安装之</h3><p><em>我试过官网所谓通过增加apt源来安装高版本Python的方法，但是在Ubuntu16.04.5上不好使</em></p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_38977019/article/details/107472381">参考文献1</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/YMY_mine/article/details/103801458">参考文献2</a><br><a target="_blank" rel="noopener" href="https://ubuntuqa.com/zh-tw/article/7722.html">参考文献3</a></p>
 <h4 id="1-python3-7-5官网"><a href="#1-python3-7-5官网" class="headerlink" title="1) python3.7.5官网"></a>1) <a target="_blank" rel="noopener" href="https://www.python.org/downloads/release/python-375/">python3.7.5官网</a></h4><p><img src="SPDK-%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97/python.png" alt="python官网"></p>
@@ -215,11 +220,19 @@
 <h4 id="2-更换版本"><a href="#2-更换版本" class="headerlink" title="2) 更换版本"></a>2) 更换版本</h4><p><code>git tag</code>，查看版本</p>
 <p>这里选择<code>v21.01</code>:<br><br><code>git checkout v21.01</code><br><br><img src="SPDK-%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97/version.png" alt="更改Python版本"><br></p>
 <h4 id="3-下载子模块"><a href="#3-下载子模块" class="headerlink" title="3) 下载子模块"></a>3) 下载子模块</h4><p><code>git submodule update --init</code><br>执行情况依赖于网络情况，多次尝试以期下载完成。</p>
-<h4 id="4-安装依赖"><a href="#4-安装依赖" class="headerlink" title="4) 安装依赖"></a>4) 安装依赖</h4><p><code>sudo ./scripts/pkgdep.sh</code></p>
+<h4 id="4-安装依赖"><a href="#4-安装依赖" class="headerlink" title="4) 安装依赖"></a>4) 安装依赖</h4><p><code>sudo ./scripts/pkgdep.sh</code><br><strong>这里安装的meson和ninja不一定可用，在最后一步执行测试遇到的问题中，会讲到解决方式。</strong></p>
+<p>在安装的时候，可能会出现一些和<code>pip</code>有关的问题。</p>
+<h5 id="ERROR-1：这里可能会出现找不到-python-main-方法的报错"><a href="#ERROR-1：这里可能会出现找不到-python-main-方法的报错" class="headerlink" title="ERROR 1：这里可能会出现找不到 python main 方法的报错"></a>ERROR 1：这里可能会出现找不到 python main 方法的报错</h5><p>因为pip版本升级了，调用main方法的方式是不一样的，<a target="_blank" rel="noopener" href="https://zongxp.blog.csdn.net/article/details/80410416">解决方式</a></p>
+<h5 id="ERROR-2：subprocess-CalledProcessError-Command-39-39-lsb-release-39-39-a-39-39-returned-non-zero-exit-status-1"><a href="#ERROR-2：subprocess-CalledProcessError-Command-39-39-lsb-release-39-39-a-39-39-returned-non-zero-exit-status-1" class="headerlink" title="ERROR 2：subprocess.CalledProcessError: Command &#39;(&#39;lsb_release&#39;, &#39;-a&#39;)&#39; returned non-zero exit status 1."></a>ERROR 2：<code>subprocess.CalledProcessError: Command &#39;(&#39;lsb_release&#39;, &#39;-a&#39;)&#39; returned non-zero exit status 1.</code></h5><p>这个完整的报错会非常长，详见<a target="_blank" rel="noopener" href="https://blog.csdn.net/JiekeXu/article/details/85220073">解决方法</a></p>
+<h5 id="ERROR-3：ssl的问题，pip-is-configured-with-locations-that-require-TLS-SSL-however-the-ssl-module-in-Python-is-not-available"><a href="#ERROR-3：ssl的问题，pip-is-configured-with-locations-that-require-TLS-SSL-however-the-ssl-module-in-Python-is-not-available" class="headerlink" title="ERROR 3：ssl的问题，pip is configured with locations that require TLS/SSL, however the ssl module in Python is not available."></a>ERROR 3：ssl的问题，<code>pip is configured with locations that require TLS/SSL, however the ssl module in Python is not available.</code></h5><p>其实就是安装ssl相关依赖就好了，但是要注意修改Python的配置文件，详见<a target="_blank" rel="noopener" href="https://blog.csdn.net/zr1076311296/article/details/75136612">解决方法</a></p>
 <h4 id="5-编译"><a href="#5-编译" class="headerlink" title="5) 编译"></a>5) 编译</h4><pre><code>./configure
 make
 </code></pre>
-<h4 id="6-执行测试"><a href="#6-执行测试" class="headerlink" title="6) 执行测试"></a>6) 执行测试</h4><p><code>./test/unit/unittest.sh</code><br><br>如果测试通过了就他妈的下好了。<br><br><img src="SPDK-%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97/test.jpg" alt="更改Python版本"><br></p>
+<p>**当后面的步骤出问题，（找不到文件啥的），可以尝试重新执行此命令。特别是<code>make</code>出问题的时候，很可能一些依赖更新或者改动之后，需要重新执行<code>./configure</code>**。</p>
+<h4 id="6-执行测试"><a href="#6-执行测试" class="headerlink" title="6) 执行测试"></a>6) 执行测试</h4><p><code>./test/unit/unittest.sh</code><br></p>
+<p><strong>如果最后输出了<code>all unit test passed</code>，就不用往后看了。</strong></p>
+<p>这一步仍然可能出问题。<br><br>当然，走到这一步，spdk的基本功能（比如发现NVMe设备）已经可以用了，但是在成功执行测试之前无法执行示例程序。&lt;br.&gt;<br>执行这条命令可能会提示<code>diabling lcov allows us to do this</code>之类的<code>错误</code>，也就是单元测试不能正常执行。<br><br>我尝试了安装lcov、卸载lcov，都不顶用。以及重新编译下载的Python3.7.5（重新编译，就是执行本文中python安装步骤的5~8，不用再重建链接啦）。<br><br>这些都不好使。<br><br>仔细看看报错，它说在 spdk/mk 中有个 cc.mk 找不到，我对比了另一台服务器上成功安装的 spdk ，是有这个文件的，但是<br><br>其下载时间比其他的文件晚。我一度怀疑是不是还是测试通过之后才能有这个文件？<br><br>既然是.mk文件缺失，于是尝试重新执行make，发现报错，<code>meson: not found</code>、<code>build-tmp not found</code>之类的。<br>但是meson和ninja不是在<code>sudo ./scripts/pkgdep.sh</code>的时候安装了吗？<br>使用 <code>sudo pip3 install meson</code>和<code>sudo pip3 install ninja</code>，确实能找得到两个包，但是<code>meson --version</code>和<code>ninja--version</code>找不到，<br><br>也就是系统中找不到这两个包。<strong>应该是包的链接不对</strong>。(当然使用非pip方式安装这两个包，但是可能会出现版本问题，所以还是想着解决pip的问题吧)<br><br><a target="_blank" rel="noopener" href="https://www.cxyzjd.com/article/qq_41108558/118103726">这里</a>是一个非常好的SPDK的安装和简单使用教程，里面<code>c、编译spdk</code>这一步，提到了<br><br>解决<code>meson: not found</code>的方式。其实也就是将pip3下载的安装包的<code>……/bin/……</code>文件链接到<code>/usr/bin/……</code>。<br><br>然后执行<code>meson --version</code>和<code>ninja --version</code>，输出版本号就算成功了。</p>
+<p>如果测试通过了就他妈的下好了。<br><br><img src="SPDK-%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97/test.jpg" alt="更改Python版本"><br></p>
 
     </div>
 
