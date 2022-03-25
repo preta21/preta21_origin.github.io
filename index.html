@@ -266,11 +266,11 @@ make
 <p>**当后面的步骤出问题，（找不到文件啥的），可以尝试重新执行此命令。特别是<code>make</code>出问题的时候，很可能一些依赖更新或者改动之后，需要重新执行<code>./configure</code>**。</p>
 <h4 id="6-执行测试"><a href="#6-执行测试" class="headerlink" title="6) 执行测试"></a>6) 执行测试</h4><p><code>./test/unit/unittest.sh</code><br></p>
 <p><strong>如果最后输出了<code>all unit test passed</code>，就不用往后看了。</strong></p>
-<p>这一步仍然可能出问题。<br><br>当然，走到这一步，spdk的基本功能（比如发现NVMe设备）已经可以用了，但是在成功执行测试之前无法执行示例程序。&lt;br.&gt;<br>执行这条命令可能会提示<code>diabling lcov allows us to do this</code>之类的<code>错误</code>，也就是单元测试不能正常执行。<br><br>我尝试了安装lcov、卸载lcov，都不顶用。以及重新编译下载的Python3.7.5（重新编译，就是执行本文中python安装步骤的5~8，不用再重建链接啦）。<br><br>这些都不好使。<br><br>仔细看看报错，它说在 spdk/mk 中有个 cc.mk 找不到，我对比了另一台服务器上成功安装的 spdk ，是有这个文件的，但是<br><br>其下载时间比其他的文件晚。我一度怀疑是不是还是测试通过之后才能有这个文件？<br><br>既然是.mk文件缺失，于是尝试重新执行make，发现报错，<code>meson: not found</code>、<code>build-tmp not found</code>之类的。<br>但是meson和ninja不是在<code>sudo ./scripts/pkgdep.sh</code>的时候安装了吗？<br>使用 <code>sudo pip3 install meson</code>和<code>sudo pip3 install ninja</code>，确实能找得到两个包，但是<code>meson --version</code>和<code>ninja--version</code>找不到，<br><br>也就是系统中找不到这两个包。<strong>应该是包的链接不对</strong>。(当然使用非pip方式安装这两个包，但是可能会出现版本问题，所以还是想着解决pip的问题吧)<br><br><a target="_blank" rel="noopener" href="https://www.cxyzjd.com/article/qq_41108558/118103726">这里</a>是一个非常好的SPDK的安装和简单使用教程，里面<code>c、编译spdk</code>这一步，提到了<br><br>解决<code>meson: not found</code>的方式。其实也就是将pip3下载的安装包的<code>……/bin/……</code>文件链接到<code>/usr/bin/……</code>。<br><br>然后执行<code>meson --version</code>和<code>ninja --version</code>，输出版本号就算成功了。</p>
+<p>这一步仍然可能出问题。<br><br>当然，走到这一步，spdk的基本功能（比如发现NVMe设备）已经可以用了，但是在成功执行测试之前无法执行示例程序。&lt;br.&gt;<br>执行这条命令可能会提示<code>disabling lcov allows us to do this</code>之类的<code>错误</code>，也就是单元测试不能正常执行。<br><br>我尝试了安装lcov、卸载lcov，都不顶用。以及重新编译下载的Python3.7.5（重新编译，就是执行本文中python安装步骤的5~8，不用再重建链接啦）。<br><br>这些都不好使。<br><br>仔细看看报错，它说在 spdk/mk 中有个 cc.mk 找不到，我对比了另一台服务器上成功安装的 spdk ，是有这个文件的，但是<br><br>其下载时间比其他的文件晚。我一度怀疑是不是还是测试通过之后才能有这个文件？<br><br>既然是.mk文件缺失，于是尝试重新执行make，发现报错，<code>meson: not found</code>、<code>build-tmp not found</code>之类的。<br>但是meson和ninja不是在<code>sudo ./scripts/pkgdep.sh</code>的时候安装了吗？<br>使用 <code>sudo pip3 install meson</code>和<code>sudo pip3 install ninja</code>，确实能找得到两个包，但是<code>meson --version</code>和<code>ninja--version</code>找不到，<br><br>也就是系统中找不到这两个包。<strong>应该是包的链接不对</strong>。(当然可以使用非pip方式安装这两个包，但是可能会出现版本问题，所以还是想着解决pip的问题吧)<br><br><a target="_blank" rel="noopener" href="https://www.cxyzjd.com/article/qq_41108558/118103726">这里</a>是一个非常好的SPDK的安装和简单使用教程，里面<code>c、编译spdk</code>这一步，提到了<br><br>解决<code>meson: not found</code>的方式。其实也就是将pip3下载的安装包的<code>……/bin/……</code>文件链接到<code>/usr/bin/……</code>。<br><br>然后执行<code>meson --version</code>和<code>ninja --version</code>，输出版本号就算成功了。</p>
 <p>如果测试通过了就他妈的下好了。<br><br><img src="SPDK-%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97/test.jpg" alt="更改Python版本"><br></p>
 <h3 id="三-绑定NVMe设备"><a href="#三-绑定NVMe设备" class="headerlink" title="三.绑定NVMe设备"></a>三.绑定NVMe设备</h3><p>到spdk文件夹下，执行命令 <br><br><code>sudo scripts/setup.sh</code> <br><br>成功绑定的时候会输出 <br><br><code>nvme -&gt; uio_pci_generic</code></p>
 <h3 id="四-执行示例-hello-world"><a href="#四-执行示例-hello-world" class="headerlink" title="四.执行示例 hello_world"></a>四.执行示例 hello_world</h3><p>成功编译的<code>spdk</code>项目会有数个已经编译好的示例项目，这些项目的源文件在 <code>spdk/examples</code> 当中，编译好的可执行文件在 <code>spdk/build/examples/</code>之中。<br><br>想执行的话，键入文件的路径即可。比如执行<code>hello_world</code>就输入(使用<code>root</code>身份)</p>
-<pre><code>sudo build/examples/hello_world
+<pre><code class="shell">sudo build/examples/hello_world
 </code></pre>
 
             
@@ -340,7 +340,7 @@ make
         
         <span class="tag">
             
-            <a href="/tags/daily" style=color:#ffa2c4>
+            <a href="/tags/daily" style=color:#03a9f4>
                 daily
             </a>
         </span>
@@ -391,7 +391,7 @@ make
         
         <span class="tag">
             
-            <a href="/tags/操作系统" style=color:#ffa2c4>
+            <a href="/tags/操作系统" style=color:#ff7d73>
                 操作系统
             </a>
         </span>
@@ -472,7 +472,7 @@ Github博客上，一直不能成功地上传图片。可能还是我的仓库�
         
         <span class="tag">
             
-            <a href="/tags/daily" style=color:#00bcd4>
+            <a href="/tags/daily" style=color:#03a9f4>
                 daily
             </a>
         </span>
@@ -527,7 +527,7 @@ Github博客上，一直不能成功地上传图片。可能还是我的仓库�
         
         <span class="tag">
             
-            <a href="/tags/daily" style=color:#00bcd4>
+            <a href="/tags/daily" style=color:#03a9f4>
                 daily
             </a>
         </span>
@@ -580,7 +580,7 @@ Github博客上，一直不能成功地上传图片。可能还是我的仓库�
         
         <span class="tag">
             
-            <a href="/tags/family" style=color:#03a9f4>
+            <a href="/tags/family" style=color:#00bcd4>
                 family
             </a>
         </span>
@@ -695,7 +695,7 @@ Github博客上，一直不能成功地上传图片。可能还是我的仓库�
         
         <span class="tag">
             
-            <a href="/tags/daily" style=color:#ff7d73>
+            <a href="/tags/daily" style=color:#ffa2c4>
                 daily
             </a>
         </span>
@@ -749,7 +749,7 @@ Github博客上，一直不能成功地上传图片。可能还是我的仓库�
         
         <span class="tag">
             
-            <a href="/tags/daily" style=color:#ffa2c4>
+            <a href="/tags/daily" style=color:#ff7d73>
                 daily
             </a>
         </span>
