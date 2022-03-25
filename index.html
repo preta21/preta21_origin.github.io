@@ -255,7 +255,7 @@
 <h4 id="2-更换版本"><a href="#2-更换版本" class="headerlink" title="2) 更换版本"></a>2) 更换版本</h4><p><code>git tag</code>，查看版本</p>
 <p>这里选择<code>v21.01</code>:<br><br><code>git checkout v21.01</code><br><br><img src="SPDK-%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97/version.png" alt="更改Python版本"><br></p>
 <h4 id="3-下载子模块"><a href="#3-下载子模块" class="headerlink" title="3) 下载子模块"></a>3) 下载子模块</h4><p><code>git submodule update --init</code><br>执行情况依赖于网络情况，多次尝试以期下载完成。</p>
-<h4 id="4-安装依赖"><a href="#4-安装依赖" class="headerlink" title="4) 安装依赖"></a>4) 安装依赖</h4><p><code>sudo ./scripts/pkgdep.sh</code><br><strong>这里安装的meson和ninja不一定可用，在最后一步执行测试遇到的问题中，会讲到解决方式。</strong></p>
+<h4 id="4-安装依赖"><a href="#4-安装依赖" class="headerlink" title="4) 安装依赖"></a>4) 安装依赖</h4><p><code>sudo ./scripts/pkgdep.sh</code><br><strong>这里安装的meson和ninja不一定可用，在最后一步执行测试遇到的问题中，会讲到解决方式。</strong><br>如果在这一步总是出现<code>unmet dependencies</code>的问题，这个问题超恶心，不过倒是可以试试对症下药，少啥就下啥，详见<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_39021670/article/details/122257321">此处</a>。</p>
 <p>在安装的时候，可能会出现一些和<code>pip</code>有关的问题。</p>
 <h5 id="ERROR-1：这里可能会出现找不到-python-main-方法的报错"><a href="#ERROR-1：这里可能会出现找不到-python-main-方法的报错" class="headerlink" title="ERROR 1：这里可能会出现找不到 python main 方法的报错"></a>ERROR 1：这里可能会出现找不到 python main 方法的报错</h5><p>因为pip版本升级了，调用main方法的方式是不一样的，<a target="_blank" rel="noopener" href="https://zongxp.blog.csdn.net/article/details/80410416">解决方式</a></p>
 <h5 id="ERROR-2：subprocess-CalledProcessError-Command-39-39-lsb-release-39-39-a-39-39-returned-non-zero-exit-status-1"><a href="#ERROR-2：subprocess-CalledProcessError-Command-39-39-lsb-release-39-39-a-39-39-returned-non-zero-exit-status-1" class="headerlink" title="ERROR 2：subprocess.CalledProcessError: Command &#39;(&#39;lsb_release&#39;, &#39;-a&#39;)&#39; returned non-zero exit status 1."></a>ERROR 2：<code>subprocess.CalledProcessError: Command &#39;(&#39;lsb_release&#39;, &#39;-a&#39;)&#39; returned non-zero exit status 1.</code></h5><p>这个完整的报错会非常长，详见<a target="_blank" rel="noopener" href="https://blog.csdn.net/JiekeXu/article/details/85220073">解决方法</a></p>
@@ -336,7 +336,7 @@ make
         
         <span class="tag">
             
-            <a href="/tags/daily" style=color:#ffa2c4>
+            <a href="/tags/daily" style=color:#ff7d73>
                 daily
             </a>
         </span>
@@ -387,7 +387,7 @@ make
         
         <span class="tag">
             
-            <a href="/tags/操作系统" style=color:#00bcd4>
+            <a href="/tags/操作系统" style=color:#03a9f4>
                 操作系统
             </a>
         </span>
@@ -468,7 +468,7 @@ Github博客上，一直不能成功地上传图片。可能还是我的仓库�
         
         <span class="tag">
             
-            <a href="/tags/daily" style=color:#ff7d73>
+            <a href="/tags/daily" style=color:#ffa2c4>
                 daily
             </a>
         </span>
@@ -523,7 +523,7 @@ Github博客上，一直不能成功地上传图片。可能还是我的仓库�
         
         <span class="tag">
             
-            <a href="/tags/daily" style=color:#ff7d73>
+            <a href="/tags/daily" style=color:#ffa2c4>
                 daily
             </a>
         </span>
@@ -576,7 +576,7 @@ Github博客上，一直不能成功地上传图片。可能还是我的仓库�
         
         <span class="tag">
             
-            <a href="/tags/family" style=color:#00a596>
+            <a href="/tags/family" style=color:#ffa2c4>
                 family
             </a>
         </span>
@@ -638,7 +638,7 @@ Github博客上，一直不能成功地上传图片。可能还是我的仓库�
         
         <span class="tag">
             
-            <a href="/tags/LaTex" style=color:#ff7d73>
+            <a href="/tags/LaTex" style=color:#00bcd4>
                 LaTex
             </a>
         </span>
@@ -691,7 +691,7 @@ Github博客上，一直不能成功地上传图片。可能还是我的仓库�
         
         <span class="tag">
             
-            <a href="/tags/daily" style=color:#03a9f4>
+            <a href="/tags/daily" style=color:#ffa2c4>
                 daily
             </a>
         </span>
@@ -745,7 +745,7 @@ Github博客上，一直不能成功地上传图片。可能还是我的仓库�
         
         <span class="tag">
             
-            <a href="/tags/daily" style=color:#03a9f4>
+            <a href="/tags/daily" style=color:#ff7d73>
                 daily
             </a>
         </span>
@@ -838,7 +838,7 @@ def decode(code, path):
         
         <span class="tag">
             
-            <a href="/tags/python" style=color:#00bcd4>
+            <a href="/tags/python" style=color:#ffa2c4>
                 python
             </a>
         </span>
