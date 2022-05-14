@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SEANAMO || 操作系统</title>
+    <title>SEANAMO || 2022-5-14</title>
     <meta name="author" content="Seana">
     <meta name="description" content=" ">
     <meta name="keywords" content=" ">
@@ -166,126 +166,59 @@
 
                 <div id="main">
                      
-<div class="categories-tags">
-    
-    <div class="all-s">
-        
-        
-        <span>
-            <a href="/tags/daily/" style=background:#03a9f4>
-                <span class="icon">
-                    <a-icon type="tag" theme="filled" />
-                </span>
-                daily
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/tags/LaTex/" style=background:#ff7d73>
-                <span class="icon">
-                    <a-icon type="tag" theme="filled" />
-                </span>
-                LaTex
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/tags/verilog/" style=background:#ffa2c4>
-                <span class="icon">
-                    <a-icon type="tag" theme="filled" />
-                </span>
-                verilog
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/tags/概率论/" style=background:#03a9f4>
-                <span class="icon">
-                    <a-icon type="tag" theme="filled" />
-                </span>
-                概率论
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/tags/family/" style=background:#00a596>
-                <span class="icon">
-                    <a-icon type="tag" theme="filled" />
-                </span>
-                family
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/tags/操作系统/" style='background:linear-gradient(120deg, #9abbf7 0%, #ffbbf4 100%)'>
-                <span class="icon">
-                    <a-icon type="tag" theme="filled" />
-                </span>
-                操作系统
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/tags/python/" style=background:#00a596>
-                <span class="icon">
-                    <a-icon type="tag" theme="filled" />
-                </span>
-                python
-            </a>
-        </span>
-        
-        
+<link rel="stylesheet" href="/css/post-body.css">
+<div class="article">
+    <div>
+        <h1>2022-5-14 </h1>
     </div>
-    <div id="archives">
-        
-        <a-timeline>
-            <a-timeline-item color="#a5c2f5">
-                <a-card hoverable>
-                    <div class="item-time">2022/3/5</div>
-                    <a href="/2022/03/05/装双系统过程总结-一-：win10-Ubuntu21-04/">
-                        <h3>装双系统过程总结(一)：win10+Ubuntu21.04</h3>
-                    </a>
-                    <div class="info">
-                        
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <a-icon type="calendar" theme="filled" />
+            </span>
+            2022/5/14
+        </span>
 
-                        
-                        <span class="tags">
-                            <span class="icon">
-                                <a-icon type="tags" theme="filled" />
-                            </span>
-                            
-                            <span class="tag">
-                                
-                                <a href="/tags/操作系统" style=color:#ff7d73>
-                                    操作系统
-                                </a>
-                            </span>
-                            
-                        </span>
-                        
-                    </div>
-                </a-card>
-            </a-timeline-item>
-        </a-timeline>
+        
+
+        
+
+        <span class="tags">
+            <span class="icon">
+                <a-icon type="tags" theme="filled" />
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/daily" style=color:#00bcd4>
+                    daily
+                </a>
+            </span>
+            
+        </span>
         
     </div>
-    <script>
-        new Vue({
-            el: '#archives'
-        })
-    </script>
+
+    <div class="content" v-pre>
+        <pre><code>嘿，服务器，你将何去何从呢？
+应该能够将这些数据重新部署到另一台服务器上吧？
+不知道呢。
+不过，现在这个一个月90的费用，实在是我承担不起的。也根本没有必要。为了写博客花智商税吧。
+</code></pre>
+<pre><code>刚才去知乎上看了一下，好像也确实没有太好的方法了。如果换一个服务器的话，好像还没有什么很可靠的廉价方法。
+目前一个较好的方案是，先购买其他的一个优惠服务器，进行数据转移之后，再考虑使用嵌入式技术搭建一个博客（比如使用树梅派）。
+看到一个叫做“硅云”的云平台，貌似也不错。可以考虑购买个半年的。
+</code></pre>
+
+    </div>
+
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <div id="comment">
+        <div id="gitalk-container">
+        </div>
+    </div>
+    
 </div>
                      
 <footer id="footer">
@@ -349,6 +282,21 @@
             }
         }
     })
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script>
+    const gitalk = new Gitalk({
+        clientID: '',
+        clientSecret: '',
+        repo: 'hexo-theme-particle',      // The repository of store comments,
+        owner: 'korilin',
+        admin: ['korilin'],
+        language: 'en',
+        id: location.pathname,      // Ensure uniqueness and length less than 50
+        distractionFreeMode: true  // Facebook-like distraction free mode
+    })
+    gitalk.render('gitalk-container')
 </script>
 
 </body>
